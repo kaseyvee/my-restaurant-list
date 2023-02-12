@@ -1,0 +1,24 @@
+@import './global.scss';
+
+.Profile {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin: 2rem 1rem;
+
+  img {
+    object-fit: cover;
+    border: 2px solid $white;
+    border-radius: 50%;
+  }
+
+  .section-right {
+    display: flex;
+    flex-direction: column;
+
+    .btn {
+      font-size: 1rem;
+    }
+  }
+}
