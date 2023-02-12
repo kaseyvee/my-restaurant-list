@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import '../styles/RestaurantItem.scss';
 
-export default function RestaurantItem({ restaurant }: any) {
+export default function RestaurantItem({ restaurant, userId }: any) {
 
   const restaurantImage = {
     background: `linear-gradient(#0000008a, #000000a7
@@ -9,7 +9,7 @@ export default function RestaurantItem({ restaurant }: any) {
   }
 
   return (
-    <div className='RestaurantItem' style={restaurantImage ? restaurantImage : {}}>
+    <a href={`/profile/${userId}/${restaurant.id}`} className='RestaurantItem' style={restaurantImage ? restaurantImage : {}}>
       <div className='title'>
         <h1>{restaurant.name}</h1>
         <h4>{restaurant.address}</h4>
@@ -28,6 +28,6 @@ export default function RestaurantItem({ restaurant }: any) {
           <Image src='/../public/three-star.png' alt='three-stars' width={43} height={41}/>
         </div>
       </div>
-    </div>
+    </a>
   );
 }

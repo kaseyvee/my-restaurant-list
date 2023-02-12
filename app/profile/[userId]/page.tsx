@@ -6,15 +6,15 @@ import RestaurantItem from '@/components/RestaurantItem';
 const pb = new PocketBase('http://127.0.0.1:8090');
 
 export default async function Profile({ params }: any) {
-  const user = await pb.collection('users').getOne(params.id);
+  const user = await pb.collection('users').getOne(params.userId);
   const userRestaurants = await pb.collection('restaurants').getList(1, 50, {
-    filter: `user_id = "${params.id}"`,
+    filter: `user_id = "${params.userId}"`,
   });
   console.log(userRestaurants)
 
   const restaurantList = userRestaurants.items.map((restaurant) => {
     return (
-      <RestaurantItem key={restaurant.id} restaurant={restaurant}/>
+      <RestaurantItem key={restaurant.id} restaurant={restaurant} userId={user.id}/>
     )
   })
 
