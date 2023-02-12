@@ -5,7 +5,7 @@ import Image from 'next/image';
 import '../styles/Nav.scss';
 
 export default function Nav() {
-  const [openNav, setOpenNav] = useState(true);
+  const [openNav, setOpenNav] = useState(false);
 
   const avatarStyles = {
     bottom: '14rem'
