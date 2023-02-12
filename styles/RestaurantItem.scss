@@ -1,0 +1,35 @@
+@import './global.scss';
+
+.RestaurantItem {
+  // border: 1px solid aqua;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 12rem;
+  font-weight: bold;
+
+  .title {
+    margin: 1rem;
+
+    h1, h4 {
+      margin: 0;
+    }
+  }
+
+  .star-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 1rem;
+  
+    .star-item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  
+      img {
+        margin-left: 1rem;
+      }
+    }
+  }
+}

@@ -2,8 +2,15 @@
 
 .Profile {
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-header {
+  display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  gap: 1rem;
   align-items: center;
   margin: 2rem 1rem;
 
@@ -17,8 +24,32 @@
     display: flex;
     flex-direction: column;
 
+    h2 {
+      margin: 0 0 1rem 0;
+    }
+
     .btn {
       font-size: 1rem;
+      padding: 0.5rem 1rem;
     }
+  }
+}
+
+.restaurants-container {
+  h1 {
+    margin: 2rem;
+  }
+}
+
+.profile-nav {
+  display: flex;
+
+  &-item {
+    display: flex;
+    justify-content: center;
+    width: 50%;
+    font-weight: bold;
+    opacity: 0.5;
+    border-bottom: 2px solid transparent;
   }
 }
