@@ -1,0 +1,44 @@
+@import '../styles/global.scss';
+
+.Nav {
+  .avatar {
+    background-color: transparent;
+    border: 0;
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    z-index: 1;
+  
+    img {
+      object-fit: cover;
+      border: 2px solid $white;
+      border-radius: 50%;
+    }
+  }
+
+  .nav-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+
+    .nav-item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      font-weight: bold;
+      background-color: $grey;
+      border-bottom: 1px solid $light-grey;
+      height: 4rem;
+    }
+
+    .new-rec {
+      background-color: $orange;
+    }
+
+    .log-out {
+      border-bottom: 0;
+    }
+  }
+}

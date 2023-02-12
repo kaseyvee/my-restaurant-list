@@ -1,5 +1,8 @@
 /* eslint-disable @next/next/no-head-element */
 
+import Nav from "@/components/Nav";
+import '../styles/global.scss';
+
 export default function RootLayout({
   children,
 }: {
@@ -7,8 +10,12 @@ export default function RootLayout({
 }) {
   return (
     <html>
-      <head></head>
-      <body>{children}</body>
+      <head>
+      </head>
+      <body>
+        <Nav />
+        {children}
+      </body>
     </html>
   );
 }
