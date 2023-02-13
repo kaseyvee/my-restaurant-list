@@ -12,7 +12,6 @@ export default async function Menu({ params }: any) {
 
   return (
     <div className='Menu'>
-      hello
       <MenuItem userId={restaurant.user_id} menuItem={menuItems.items[0]}/>
     </div>
   )
