@@ -1,8 +1,8 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import PocketBase from 'pocketbase';
 import { useRouter } from 'next/navigation';
+import PocketBase from 'pocketbase';
 import Image from 'next/image';
 import ReactLoading from 'react-loading';
 
@@ -34,6 +34,12 @@ export default function SignUp() {
       return setError("Passwords are not the same.");
     }
 
+    if (password.current) {
+      if (password.current.value.length <= 7) {
+        return setError("Password must be at least 8 characters long.")
+      }
+    }
+
     setLoading(true);
 
     const data = {
@@ -42,6 +48,7 @@ export default function SignUp() {
       "emailVisibility": true,
       "password": password.current && password.current.value,
       "passwordConfirm": passwordConfirm.current && passwordConfirm.current.value,
+      "avatar": "https://i.pinimg.com/originals/48/e2/51/48e251739b188d1e7933d3b40dc37e14.png",
     };
 
     try {
@@ -76,7 +83,7 @@ export default function SignUp() {
             passwordConfirm={passwordConfirm}
           />
           <button className='btn' type='submit' onClick={handleSignUp}>Sign Up</button>
-          {error && <h2 className='error'>{error}</h2>}
+          {error && <h4 className='error'>{error}</h4>}
         </>
       }
     </div>
