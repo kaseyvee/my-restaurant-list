@@ -13,6 +13,15 @@ import HomeForm from '@/components/HomeForm';
 const pb = new PocketBase('http://127.0.0.1:8090');
 
 export default function LogIn() {
+  // async function checkIfLoggedIn() {
+  //   const authData = await pb.collection('users').authRefresh();
+  //   console.log(pb.authStore.isValid);
+  //   console.log(pb.authStore.token);
+  //   console.log(pb.authStore.model && pb.authStore.model.id);
+  // }
+
+  // checkIfLoggedIn();
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -21,7 +30,8 @@ export default function LogIn() {
 
   const router = useRouter();
 
-  async function handleLogIn() {
+  async function handleLogIn(e: any) {
+    e.preventDefault();
     setError('');
 
     if ((email.current && !email.current.value) || (password.current && !password.current.value)) {
@@ -62,8 +72,8 @@ export default function LogIn() {
           <HomeForm
             email={email}
             password={password}
+            onSubmit={(e: any) => handleLogIn(e)}
           />
-          <button className='btn clickable' type='submit' onClick={handleLogIn}>Log In</button>
           {error && <h4 className='error'>{error}</h4>}
         </>
       }

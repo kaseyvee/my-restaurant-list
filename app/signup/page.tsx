@@ -23,7 +23,8 @@ export default function SignUp() {
 
   const router = useRouter();
 
-  async function handleSignUp() {
+  async function handleSignUp(e: any) {
+    e.preventDefault();
     setError('');
 
     if ((email.current && !email.current.value) || (username.current && !username.current.value) || (password.current && !password.current.value) || (passwordConfirm.current && !passwordConfirm.current)) {
@@ -81,8 +82,8 @@ export default function SignUp() {
             username={username}
             password={password}
             passwordConfirm={passwordConfirm}
+            onSubmit={(e: any) => handleSignUp(e)}
           />
-          <button className='btn clickable' type='submit' onClick={handleSignUp}>Sign Up</button>
           {error && <h4 className='error'>{error}</h4>}
         </>
       }
