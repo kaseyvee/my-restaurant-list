@@ -1,16 +1,22 @@
 import Image from "next/legacy/image";
 import '../styles/RestaurantItem.scss';
 
-export default function RestaurantItem({ restaurant, userId }: any) {
+export default function RestaurantItem({ restaurant, userId, username }: any) {
 
   const restaurantImage = {
     background: `linear-gradient(#0000008a, #000000a7
-      ), center/cover url('${restaurant.image}')`
+      ), center/cover url('${restaurant.image ? restaurant.image : null}')`
   }
 
   return (
-    <a href={`/profile/${userId}/${restaurant.id}`} className='RestaurantItem' style={restaurantImage ? restaurantImage : {}}>
+    <a href={`/profile/${userId}/${restaurant.id}`} className='RestaurantItem' style={restaurantImage}>
       <div className='title'>
+        {username &&
+          <h4>
+            <strong>
+                @{username}&apos;s
+            </strong> favourites at
+          </h4>}
         <h1>{restaurant.name}</h1>
         <h4>{restaurant.address}</h4>
       </div>

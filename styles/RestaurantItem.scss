@@ -10,10 +10,14 @@
   font-weight: bold;
 
   .title {
-    margin: 1rem;
+    margin: 1.5rem;
 
     h1, h4 {
       margin: 0;
+    }
+
+    h4 {
+      font-weight: 400;
     }
   }
 
@@ -26,9 +30,9 @@
       display: flex;
       justify-content: center;
       align-items: center;
-  
-      img {
-        margin-left: 1rem;
+
+      p {
+        margin-right: 1rem;
       }
     }
   }

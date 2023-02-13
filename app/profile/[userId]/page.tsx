@@ -1,6 +1,6 @@
 import '../../../styles/Profile.scss';
 import PocketBase from 'pocketbase';
-import Image from "next/legacy/image";
+import Image from "next/image";
 import RestaurantItem from '@/components/RestaurantItem';
 
 const pb = new PocketBase('http://127.0.0.1:8090');
@@ -10,7 +10,6 @@ export default async function Profile({ params }: any) {
   const userRestaurants = await pb.collection('restaurants').getList(1, 50, {
     filter: `user_id = "${params.userId}"`,
   });
-  console.log(userRestaurants)
 
   const restaurantList = userRestaurants.items.map((restaurant) => {
     return (
@@ -29,14 +28,14 @@ export default async function Profile({ params }: any) {
           </button>
         </div>
       </div>
-      {/* <div className='profile-nav'>
-        <div className='profile-nav-item'>
+      <div className='profile-nav'>
+        <div className='profile-nav-item newest'>
           Newest
         </div>
         <div className='profile-nav-item'>
           Closest
         </div>
-      </div> */}
+      </div>
       <div className='restaurants-container'>
         <h1>{user.username}&apos;s newest favourites</h1>
         {restaurantList}

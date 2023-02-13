@@ -13,8 +13,8 @@ export default function RootLayout({
       <head>
       </head>
       <body>
-        <Nav />
         {children}
+        <Nav />
       </body>
     </html>
   );

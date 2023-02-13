@@ -1,6 +1,8 @@
 @import '../styles/global.scss';
 
 .Nav {
+  z-index: 1000;
+
   .avatar {
     background-color: transparent;
     border: 0;

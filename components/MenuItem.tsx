@@ -3,7 +3,6 @@ import '../styles/MenuItem.scss'
 import Image from "next/legacy/image";
 
 export default function MenuItem({ menuItem, userId }: any) {
-  console.log("rating: ", menuItem.rating)
   function getStars() {
     if (menuItem.rating === 3) {
       return (
@@ -20,10 +19,11 @@ export default function MenuItem({ menuItem, userId }: any) {
         <Image src='/../public/one-star.png' alt='one-stars' width={22} height={22}/>
       )
     }
-  }
+  };
+  
   return (
-    <a href={`/profile/${userId}/${menuItem.id}`} className='MenuItem'>
-      <Image src={menuItem.image} alt='menu-item' width="900" height="500" objectFit='cover'/>
+    <div className='MenuItem'>
+      {menuItem.image && <Image src={menuItem.image} alt='menu-item' width="900" height="500" objectFit='cover'/>}
       <div className='bottom-card'>
         <div className='title'>
           <h1>
@@ -35,6 +35,6 @@ export default function MenuItem({ menuItem, userId }: any) {
         </div>
         <p>{menuItem.review}</p>
       </div>
-    </a>
+    </div>
   );
 }

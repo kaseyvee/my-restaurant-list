@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import Image from "next/legacy/image";
+import Image from "next/image";
 import '../styles/Nav.scss';
 
 export default function Nav() {
