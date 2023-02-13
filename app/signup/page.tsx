@@ -1,27 +1,57 @@
 'use client';
 
-import '../../styles/LogInSignUp.scss';
-import Image from 'next/image';
-import HomeForm from '../../components/HomeForm';
+import { useRef, useState } from 'react';
 import PocketBase from 'pocketbase';
+import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import ReactLoading from 'react-loading';
-import { useState } from 'react';
+
+import '../../styles/LogInSignUp.scss';
+
+import HomeForm from '../../components/HomeForm';
 
 const pb = new PocketBase('http://127.0.0.1:8090');
 
 export default function SignUp() {
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const email = useRef<HTMLInputElement>(null);
+  const username = useRef<HTMLInputElement>(null);
+  const password = useRef<HTMLInputElement>(null);
+  const passwordConfirm = useRef<HTMLInputElement>(null);
+
+  const router = useRouter();
 
   async function handleSignUp() {
+    setError('');
+
+    if ((email.current && !email.current.value) || (username.current && !username.current.value) || (password.current && !password.current.value) || (passwordConfirm.current && !passwordConfirm.current)) {
+      return setError("Please fill out all fields.");
+    }
+
+    if ((password.current && password.current.value) !== (passwordConfirm.current && passwordConfirm.current.value)) {
+      return setError("Passwords are not the same.");
+    }
+
+    setLoading(true);
+
     const data = {
-        "username": "test_username",
-        "email": "test@example.com",
-        "emailVisibility": true,
-        "password": "12345678",
-        "passwordConfirm": "12345678",
-        "avatar": "https://example.com"
+      "email": email.current && email.current.value,
+      "username": username.current && username.current.value,
+      "emailVisibility": true,
+      "password": password.current && password.current.value,
+      "passwordConfirm": passwordConfirm.current && passwordConfirm.current.value,
     };
-    const record = await pb.collection('users').create(data);
+
+    try {
+      await pb.collection('users').create(data);
+      router.push(`/login`)
+    } catch(e) {
+      setError("Email or username already exists.");
+      setLoading(false);
+      console.log(e)
+    }
   };
 
   const loadingStyle = {
@@ -38,8 +68,15 @@ export default function SignUp() {
             <h1>Sign Up</h1>
             <a href='/'><Image src='/../public/back.png' alt='back' width={58} height={58}/></a>
           </div>
-          <HomeForm signup={true} />
-          <button className='btn'>Sign Up</button>
+          <HomeForm
+            signup={true}
+            email={email}
+            username={username}
+            password={password}
+            passwordConfirm={passwordConfirm}
+          />
+          <button className='btn' type='submit' onClick={handleSignUp}>Sign Up</button>
+          {error && <h2 className='error'>{error}</h2>}
         </>
       }
     </div>
