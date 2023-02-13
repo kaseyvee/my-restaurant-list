@@ -1,6 +1,6 @@
 import '../../../styles/Profile.scss';
 import PocketBase from 'pocketbase';
-import Image from "next/image";
+import Image from "next/legacy/image";
 import RestaurantItem from '@/components/RestaurantItem';
 
 const pb = new PocketBase('http://127.0.0.1:8090');

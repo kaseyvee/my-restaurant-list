@@ -1,3 +1,4 @@
+import '../../../../styles/Menu.scss';
 import MenuItem from '@/components/MenuItem';
 import PocketBase from 'pocketbase';
 
@@ -8,11 +9,16 @@ export default async function Menu({ params }: any) {
   const menuItems = await pb.collection('menu_items').getList(1, 50, {
     filter: `restaurant_id = "${params.restaurantId}"`,
   });
-  console.log(menuItems)
+  
+  const menuItemList = menuItems.items.map((menuItem) => {
+    return (
+      <MenuItem key={menuItem.id} userId={restaurant.user_id} menuItem={menuItem}/>
+    )
+  })
 
   return (
     <div className='Menu'>
-      <MenuItem userId={restaurant.user_id} menuItem={menuItems.items[0]}/>
+      {menuItemList}
     </div>
   )
 }

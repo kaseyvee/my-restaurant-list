@@ -1,4 +1,6 @@
-import Image from "next/image";
+import '../styles/MenuItem.scss'
+
+import Image from "next/legacy/image";
 
 export default function MenuItem({ menuItem, userId }: any) {
   console.log("rating: ", menuItem.rating)
@@ -21,12 +23,17 @@ export default function MenuItem({ menuItem, userId }: any) {
   }
   return (
     <a href={`/profile/${userId}/${menuItem.id}`} className='MenuItem'>
-      <Image src={menuItem.image} alt='menu-item' layout='fill' objectFit='contain'/>
-      <div>
-        <h1>
-          hello
-        </h1>
-        {getStars()}
+      <Image src={menuItem.image} alt='menu-item' width="900" height="500" objectFit='cover'/>
+      <div className='bottom-card'>
+        <div className='title'>
+          <h1>
+            {menuItem.name}
+          </h1>
+          <div className='rating'>
+            {getStars()}
+          </div>
+        </div>
+        <p>{menuItem.review}</p>
       </div>
     </a>
   );

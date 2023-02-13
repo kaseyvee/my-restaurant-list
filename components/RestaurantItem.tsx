@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import '../styles/RestaurantItem.scss';
 
 export default function RestaurantItem({ restaurant, userId }: any) {
