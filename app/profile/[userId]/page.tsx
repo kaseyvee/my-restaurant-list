@@ -13,7 +13,9 @@ export default async function Profile({ params }: any) {
 
   const restaurantList = userRestaurants.items.map((restaurant) => {
     return (
-      <RestaurantItem key={restaurant.id} restaurant={restaurant} userId={user.id}/>
+      <a href={`/profile/${user.id}/${restaurant.id}`} key={restaurant.id}>
+        <RestaurantItem restaurant={restaurant}/>
+      </a>
     )
   })
 
