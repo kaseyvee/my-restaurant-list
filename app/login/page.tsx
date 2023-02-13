@@ -31,13 +31,17 @@ export default function LogIn() {
     setLoading(true);
 
     if (email.current && password.current) {
-      const authData = await pb.collection('users').authWithPassword(
-        email.current.value,
-        password.current.value,
-      );
-
-      console.log("authData: ", authData);
-      router.push(`/profile/${authData.record.id}`)
+      try {
+        const authData = await pb.collection('users').authWithPassword(
+          email.current.value,
+          password.current.value,
+        );
+        console.log("authData: ", authData);
+        router.push(`/profile/${authData.record.id}`)
+      } catch(e) {
+        setError("Invalid email or password.");
+        setLoading(false);
+      }
     }
   }
 
@@ -53,14 +57,14 @@ export default function LogIn() {
         <>
           <div className='title'>
             <h1>Log In</h1>
-            <a href='/'><Image src='/../public/back.png' alt='back' width={58} height={58}/></a>
+            <a href='/' className='clickable'><Image src='/../public/back.png' alt='back' width={58} height={58}/></a>
           </div>
           <HomeForm
             email={email}
             password={password}
           />
-          <button className='btn' type='submit' onClick={handleLogIn}>Log In</button>
-          {error && <h2 className='error'>{error}</h2>}
+          <button className='btn clickable' type='submit' onClick={handleLogIn}>Log In</button>
+          {error && <h4 className='error'>{error}</h4>}
         </>
       }
     </div>

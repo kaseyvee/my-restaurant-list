@@ -7,10 +7,10 @@ export default function HomePage() {
     <div className='HomePage'>
       <h1>untitled yum yum app</h1>
       <div className='btns-container'>
-        <button className='btn' onClick={() => window.location.href='/login'}>
+        <button className='btn clickable' onClick={() => window.location.href='/login'}>
           Log In
         </button>
-        <button className='btn' onClick={() => window.location.href='/signup'}>
+        <button className='btn clickable' onClick={() => window.location.href='/signup'}>
           Sign Up
         </button>
       </div>

@@ -82,7 +82,7 @@ export default function SignUp() {
             password={password}
             passwordConfirm={passwordConfirm}
           />
-          <button className='btn' type='submit' onClick={handleSignUp}>Sign Up</button>
+          <button className='btn clickable' type='submit' onClick={handleSignUp}>Sign Up</button>
           {error && <h4 className='error'>{error}</h4>}
         </>
       }

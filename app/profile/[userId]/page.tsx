@@ -25,7 +25,7 @@ export default async function Profile({ params }: any) {
         <Image src={user.avatar} alt='avatar' width={120} height={120}/>
         <div className='section-right'>
           <h2>@{user.username}</h2>
-          <button className='btn'>
+          <button className='btn clickable'>
             Share Profile
           </button>
         </div>
