@@ -1,4 +1,4 @@
-import '../../../../styles/Menu.scss';
+import '../../../styles/Menu.scss';
 import MenuItem from '@/components/MenuItem';
 import PocketBase from 'pocketbase';
 import RestaurantItem from '@/components/RestaurantItem';

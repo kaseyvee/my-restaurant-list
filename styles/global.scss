@@ -40,6 +40,12 @@ html {
       }
     }
 
+    .loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
     .error {
       color: #C75734;
       font-weight: 400;

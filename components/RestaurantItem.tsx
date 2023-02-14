@@ -13,7 +13,7 @@ export default function RestaurantItem({ restaurant, username }: any) {
       <div className='title'>
         {username &&
           <h4>
-            <a href={`/profile/${restaurant.user_id}`}><strong>
+            <a href={`/${username}`}><strong>
                 @{username}&apos;s
             </strong></a> favourites at
           </h4>}

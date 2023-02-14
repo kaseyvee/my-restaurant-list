@@ -1,4 +1,4 @@
-import '../../../styles/Profile.scss';
+import '../../styles/Profile.scss';
 import PocketBase from 'pocketbase';
 import Image from "next/image";
 import RestaurantItem from '@/components/RestaurantItem';
@@ -6,14 +6,18 @@ import RestaurantItem from '@/components/RestaurantItem';
 const pb = new PocketBase('http://127.0.0.1:8090');
 
 export default async function Profile({ params }: any) {
-  const user = await pb.collection('users').getOne(params.userId);
+  console.log("logged in?: ", pb.authStore.isValid);
+  console.log("token:", pb.authStore.token);
+  console.log("model: ", pb.authStore.model && pb.authStore.model.id);
+
+  const user = await pb.collection('users').getFirstListItem(`username="${params.username}"`);
   const userRestaurants = await pb.collection('restaurants').getList(1, 50, {
-    filter: `user_id = "${params.userId}"`,
+    filter: `user_id = "${user.id}"`,
   });
 
   const restaurantList = userRestaurants.items.map((restaurant) => {
     return (
-      <a href={`/profile/${user.id}/${restaurant.id}`} key={restaurant.id}>
+      <a href={`/${user.id}/${restaurant.id}`} key={restaurant.id}>
         <RestaurantItem restaurant={restaurant}/>
       </a>
     )
