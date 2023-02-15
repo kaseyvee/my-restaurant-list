@@ -16,7 +16,7 @@ export default async function Menu({ params }: any) {
     return (
       <MenuItem key={menuItem.id} userId={restaurant.user_id} menuItem={menuItem}/>
     )
-  })
+  });
 
   return (
     <div className='Menu'>

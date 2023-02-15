@@ -13,10 +13,6 @@ import HomeForm from '@/components/HomeForm';
 const pb = new PocketBase('http://127.0.0.1:8090');
 
 export default function LogIn() {
-  console.log("logged in?: ", pb.authStore.isValid);
-  console.log("token:", pb.authStore.token);
-  console.log("model: ", pb.authStore.model && pb.authStore.model.id);
-
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -42,7 +38,7 @@ export default function LogIn() {
           password.current.value,
         );
         console.log("authData: ", authData);
-        router.push(`/profile/${authData.record.id}`)
+        router.push(`/${authData.record.username}`)
         setLoading(false);
 
       } catch(e) {

@@ -11,6 +11,10 @@ const pb = new PocketBase('http://127.0.0.1:8090');
 export default function Nav() {
   const [openNav, setOpenNav] = useState(false);
 
+  const loggedInUserUnparsed: any = window.localStorage.getItem('pocketbase_auth');
+  const loggedInUserParsed = JSON.parse(loggedInUserUnparsed);
+  const loggedInUser = loggedInUserParsed.model;
+
   const router = useRouter();
 
   const avatarStyles = {
@@ -33,7 +37,7 @@ export default function Nav() {
         style={openNav ? avatarStyles : {}}
         onClick={handleNavToggle}
       >
-        <Image src='https://i.imgur.com/NAUj82l.jpg' alt='avatar' width={50} height={50}/>
+        <Image src={loggedInUser.avatar} alt='avatar' width={50} height={50}/>
       </button>
       {openNav &&
       <div className='nav-container'>
