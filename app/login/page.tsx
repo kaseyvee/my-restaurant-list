@@ -1,8 +1,9 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import PocketBase from 'pocketbase';
+import getLoggedInUser from '@/helpers/getLoggedInUser';
 import Image from 'next/image';
 import ReactLoading from 'react-loading';
 
@@ -20,6 +21,13 @@ export default function LogIn() {
   const password = useRef<HTMLInputElement>(null);
 
   const router = useRouter();
+
+  useEffect(() => {
+    if (getLoggedInUser()) {
+      const user = getLoggedInUser();
+      router.push(`/${user.username}`);
+    }
+  }, []);
 
   async function handleLogIn(e: any) {
     e.preventDefault();
