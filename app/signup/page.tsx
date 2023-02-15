@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import PocketBase from 'pocketbase';
+import { pb } from '@/helpers/dbconnect';
 import getLoggedInUser from '@/helpers/getLoggedInUser';
 import Image from 'next/image';
 import ReactLoading from 'react-loading';
@@ -10,8 +10,6 @@ import ReactLoading from 'react-loading';
 import '../../styles/LogInSignUp.scss';
 
 import HomeForm from '../../components/HomeForm';
-
-const pb = new PocketBase('http://127.0.0.1:8090');
 
 export default function SignUp() {
   const [loading, setLoading] = useState(false);
@@ -26,8 +24,8 @@ export default function SignUp() {
 
   useEffect(() => {
     if (getLoggedInUser()) {
-      const user = getLoggedInUser();
-      router.push(`/${user.username}`);
+      const loggedInUser = getLoggedInUser();
+      router.push(`/${loggedInUser.username}`);
     }
   }, []);
 

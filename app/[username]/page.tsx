@@ -1,18 +1,16 @@
-import PocketBase from 'pocketbase';
+import { pb } from "@/helpers/dbconnect";
 import Image from "next/image";
 import '../../styles/Profile.scss';
 import RestaurantItem from '@/components/RestaurantItem';
+import getUserRestaurants from "@/helpers/getUserRestaurants";
 
-const pb = new PocketBase('http://127.0.0.1:8090');
 
 export default async function Profile({ params }: any) {
 
   const user = await pb.collection('users').getFirstListItem(`username="${params.username}"`);
-  const userRestaurants = await pb.collection('restaurants').getList(1, 50, {
-    filter: `user_id = "${user.id}"`,
-  });
+  const userRestaurants = await getUserRestaurants(user.id);
 
-  const restaurantList = userRestaurants.items.map((restaurant) => {
+  const restaurantList = userRestaurants.map((restaurant) => {
     return (
       <a href={`/${user.username}/${restaurant.id}`} key={restaurant.id}>
         <RestaurantItem restaurant={restaurant}/>

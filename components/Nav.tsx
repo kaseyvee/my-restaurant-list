@@ -1,16 +1,18 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import PocketBase from 'pocketbase';
+import { pb } from '@/helpers/dbconnect';
 import getLoggedInUser from '@/helpers/getLoggedInUser';
 import Image from "next/image";
 import '../styles/Nav.scss';
 
-const pb = new PocketBase('http://127.0.0.1:8090');
-
 export default function Nav() {
   const [openNav, setOpenNav] = useState(false);
+
+  useEffect(() => {
+    setOpenNav(false);
+  }, [])
 
   const loggedInUser = getLoggedInUser();
 
@@ -42,9 +44,9 @@ export default function Nav() {
       <div className='nav-container'>
         {loggedInUser ? 
           <>
-            <div className='nav-item clickable new-rec'>
+            <a href='/new' className='nav-item clickable new-rec'>
               New Recommendation
-            </div>
+            </a>
             <a href={`/${loggedInUser.username}`} className='nav-item clickable'>
               My Profile
             </a>
@@ -57,6 +59,9 @@ export default function Nav() {
           </>
           :
           <>
+            <a href='/new' className='nav-item clickable new-rec'>
+              New Recommendation
+            </a>
             <a href='/' className='nav-item clickable'>
               Home
             </a>
