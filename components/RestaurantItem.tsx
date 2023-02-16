@@ -23,15 +23,15 @@ export default function RestaurantItem({ restaurant, username }: any) {
       <div className='star-container'>
         <div className='star-item'>
           <p>{restaurant.one_stars}</p>
-          <Image src='/../public/one-star.png' alt='one-stars' width={22} height={22}/>
+          <Image src='/one-star.png' alt='one-stars' width={22} height={22}/>
         </div>
         <div className='star-item'>
           <p>{restaurant.two_stars}</p>
-          <Image src='/../public/two-star.png' alt='two-stars' width={33} height={41}/>
+          <Image src='/two-star.png' alt='two-stars' width={33} height={41}/>
         </div>
         <div className='star-item'>
           <p>{restaurant.three_stars}</p>
-          <Image src='/../public/three-star.png' alt='three-stars' width={43} height={41}/>
+          <Image src='/three-star.png' alt='three-stars' width={43} height={41}/>
         </div>
       </div>
     </div>

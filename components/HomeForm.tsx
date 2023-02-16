@@ -5,8 +5,6 @@ import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import ReactLoading from 'react-loading';
 
-import '../styles/HomeForm.scss';
-
 export default function HomeForm(props: any) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');

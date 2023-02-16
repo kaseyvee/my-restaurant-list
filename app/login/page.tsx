@@ -9,7 +9,7 @@ export default function LogIn() {
     <div className='Form'>
       <div className='title'>
         <h1>Log In</h1>
-        <a href='/' className='clickable'><Image src='/../public/back.png' alt='back' width={58} height={58}/></a>
+        <a href='/' className='clickable'><Image src='/back.png' alt='back' width={58} height={58}/></a>
       </div>
       <HomeForm/>
     </div>

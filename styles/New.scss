@@ -1,0 +1,13 @@
+@import './global.scss';
+
+.New {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .title {
+    width: 80%;
+    margin: 2rem;
+  }
+}

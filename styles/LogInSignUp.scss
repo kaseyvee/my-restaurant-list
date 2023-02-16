@@ -13,4 +13,31 @@
     width: 80%;
     margin: 2rem;
   }
+
+  .HomeForm {
+    width: 80%;
+  
+    form {
+      display: flex;
+      flex-direction: column;
+  
+      input {
+        background-color: transparent;
+        height: 3rem;
+        border: 0;
+        border-bottom: 1px solid $grey;
+        margin-bottom: 1rem;
+        color: $white;
+        font-size: 1rem;
+    
+        &::placeholder {
+          color: $grey;
+          font-size: 1rem;
+        }
+      }
+      .btn {
+      }
+    }
+    
+  }
 }

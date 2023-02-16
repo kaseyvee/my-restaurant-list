@@ -1,14 +1,23 @@
 'use client';
 
-import { pb } from "@/helpers/dbconnect";
-import getUserRestaurants from "@/helpers/getUserRestaurants";
 import { useEffect, useState } from "react";
+import { pb } from "@/helpers/dbconnect";
+import { useRouter } from 'next/navigation';
+import getUserRestaurants from "@/helpers/getUserRestaurants";
 import RestaurantItem from "@/components/RestaurantItem";
+
+import '../../styles/New.scss';
 
 export default function New() {
   const [restaurants, setRestaurants] = useState<any>([]);
 
+  const router = useRouter();
+
   useEffect(() => {
+    if (!pb.authStore.isValid) {
+      return router.push('/login');
+    }
+
     const loggedInUser: any = pb.authStore.model;
     getUserRestaurants(loggedInUser.id)
       .then((restaurants) => setRestaurants(restaurants))
@@ -25,8 +34,13 @@ export default function New() {
 
   return (
     <div className='New'>
-      <button className="btn clickable">New Restaurant</button>
-      {restaurantList}
+      <div className="title">
+        <h1>New Recommendation</h1>
+        <button className="btn clickable">New Restaurant</button>
+      </div>
+      <div>
+        {restaurantList}
+      </div>
     </div>
   );
 }
