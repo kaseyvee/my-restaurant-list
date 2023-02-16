@@ -18,19 +18,25 @@ html {
       display: flex;
       flex-direction: column;
   
-      input {
+      input, textarea, select {
         background-color: transparent;
         height: 3rem;
         border: 0;
         border-bottom: 1px solid $grey;
         margin-bottom: 1rem;
         color: $white;
+        font-family: inherit;
         font-size: 1rem;
+        resize: none;
     
         &::placeholder {
           color: $grey;
           font-size: 1rem;
         }
+      }
+
+      textarea {
+        height: 7rem;
       }
     }
 

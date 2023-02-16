@@ -10,6 +10,7 @@ export default async function Menu({ params }: any) {
   const username = await pb.collection('users').getOne(restaurant.user_id);
   const menuItems = await pb.collection('menu_items').getList(1, 50, {
     filter: `restaurant_id = "${params.restaurantId}"`,
+    sort: '-created',
   });
   
   const menuItemList = menuItems.items.map((menuItem) => {

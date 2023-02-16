@@ -33,7 +33,7 @@ export default function MenuItem({ menuItem, userId }: any) {
             {getStars()}
           </div>
         </div>
-        <p>{menuItem.review}</p>
+        <p>{menuItem.notes}</p>
       </div>
     </div>
   );

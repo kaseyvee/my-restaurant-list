@@ -1,16 +1,16 @@
 'use client';
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useRouter } from 'next/navigation';
 import { pb } from "@/helpers/dbconnect";
 import { storage } from "@/helpers/firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { v4 } from "uuid"; 
 
-import '../../../styles/NewRestaurant.scss';
+import '../../../styles/NewForm.scss';
 
-import AddButton from "@/components/AddButton";
 import FormTitle from "@/components/FormTitle";
+import AddButton from "@/components/AddButton";
 import Image from "next/image";
 
 export default function NewRestaurant() {
@@ -72,7 +72,7 @@ export default function NewRestaurant() {
   }
 
   return (
-    <div className='NewRestaurant'>
+    <div className='NewForm'>
       <FormTitle text='New Restaurant' redirect='/new'/>
       <form onSubmit={e => handleCreateRestaurant(e)}>
         <input ref={name} type='text' id='name' placeholder='Name'/>
