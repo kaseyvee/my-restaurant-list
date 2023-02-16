@@ -3,18 +3,19 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { pb } from '@/helpers/dbconnect';
-import getLoggedInUser from '@/helpers/getLoggedInUser';
 import Image from "next/image";
 import '../styles/Nav.scss';
 
 export default function Nav() {
   const [openNav, setOpenNav] = useState(false);
+  const [loggedInUser, setLoggedInUser] = useState<any>(null) 
 
   useEffect(() => {
     setOpenNav(false);
+    if (pb.authStore.isValid) {
+      setLoggedInUser(pb.authStore.model);
+    }
   }, [])
-
-  const loggedInUser = getLoggedInUser();
 
   const router = useRouter();
 
@@ -27,6 +28,8 @@ export default function Nav() {
   };
 
   function handleLogOut() {
+    setOpenNav(false);
+    setLoggedInUser(null);
     pb.authStore.clear();
     router.push(`/login`)
   }
@@ -59,9 +62,6 @@ export default function Nav() {
           </>
           :
           <>
-            <a href='/new' className='nav-item clickable new-rec'>
-              New Recommendation
-            </a>
             <a href='/' className='nav-item clickable'>
               Home
             </a>

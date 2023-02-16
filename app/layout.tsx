@@ -1,5 +1,3 @@
-/* eslint-disable @next/next/no-head-element */
-
 import Nav from "@/components/Nav";
 import '../styles/global.scss';
 

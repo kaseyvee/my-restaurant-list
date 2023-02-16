@@ -4,9 +4,7 @@ import '../../styles/Profile.scss';
 import RestaurantItem from '@/components/RestaurantItem';
 import getUserRestaurants from "@/helpers/getUserRestaurants";
 
-
 export default async function Profile({ params }: any) {
-
   const user = await pb.collection('users').getFirstListItem(`username="${params.username}"`);
   const userRestaurants = await getUserRestaurants(user.id);
 
@@ -24,7 +22,7 @@ export default async function Profile({ params }: any) {
         <Image src={user.avatar} alt='avatar' width={120} height={120}/>
         <div className='section-right'>
           <h2>@{user.username}</h2>
-          <button className='btn clickable'>
+          <button className='btn'>
             Share Profile
           </button>
         </div>

@@ -1,11 +1,17 @@
 'use client'
 
-import getLoggedInUser from '@/helpers/getLoggedInUser';
+import { pb } from '@/helpers/dbconnect';
+import { useEffect, useState } from 'react';
 import '../styles/HomePage.scss';
 
 export default function HomePage() {
+  const [loggedInUser, setLoggedInUser] = useState<any>(null) 
 
-  const loggedInUser = getLoggedInUser();
+  useEffect(() => {
+    if (pb.authStore.isValid) {
+      setLoggedInUser(pb.authStore.model);
+    }
+  }, [])
 
   return (
     <div className='HomePage'>

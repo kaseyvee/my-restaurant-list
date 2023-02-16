@@ -1,19 +1,32 @@
+'use client';
+
 import { pb } from "@/helpers/dbconnect";
-// import getLoggedInUser from "@/helpers/getLoggedInUser";
 import getUserRestaurants from "@/helpers/getUserRestaurants";
+import { useEffect, useState } from "react";
+import RestaurantItem from "@/components/RestaurantItem";
 
-export default async function New() {
-  // console.log("authstore: ", pb.authStore);
+export default function New() {
+  const [restaurants, setRestaurants] = useState<any>([]);
 
-  // const authData = await pb.collection('users').authRefresh();
-  // const userRestaurants = await getUserRestaurants(authData.record.id);
+  useEffect(() => {
+    const loggedInUser: any = pb.authStore.model;
+    getUserRestaurants(loggedInUser.id)
+      .then((restaurants) => setRestaurants(restaurants))
+      .catch(e => console.log(e.message));
+  }, [])
 
-  // console.log("authData: ", authData)
+  const restaurantList = restaurants.map((restaurant: any) => {
+    return (
+      <a href={`/${restaurant.id}/create`} key={restaurant.id}>
+        <RestaurantItem restaurant={restaurant}/>
+      </a>
+    )
+  })
 
   return (
     <div className='New'>
-      <button className="btn">New Restaurant</button>
-
+      <button className="btn clickable">New Restaurant</button>
+      {restaurantList}
     </div>
   );
 }
