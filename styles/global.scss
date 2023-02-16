@@ -14,12 +14,35 @@ html {
     height: 100vh;
     margin: 0;
 
+    form {
+      display: flex;
+      flex-direction: column;
+  
+      input {
+        background-color: transparent;
+        height: 3rem;
+        border: 0;
+        border-bottom: 1px solid $grey;
+        margin-bottom: 1rem;
+        color: $white;
+        font-size: 1rem;
+    
+        &::placeholder {
+          color: $grey;
+          font-size: 1rem;
+        }
+      }
+    }
+
     a {
       color: inherit;
       text-decoration: none;
     }
 
     .btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       margin: 0.5rem 0;
       padding: 1rem;
       color: inherit;
@@ -36,6 +59,10 @@ html {
   
       &:active {
         filter: brightness(0.5);
+      }
+
+      img {
+        margin-right: 1rem;
       }
     }
 

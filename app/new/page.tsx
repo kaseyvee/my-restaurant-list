@@ -7,6 +7,8 @@ import getUserRestaurants from "@/helpers/getUserRestaurants";
 import RestaurantItem from "@/components/RestaurantItem";
 
 import '../../styles/New.scss';
+import Image from "next/image";
+import AddButton from "@/components/AddButton";
 
 export default function New() {
   const [restaurants, setRestaurants] = useState<any>([]);
@@ -36,7 +38,7 @@ export default function New() {
     <div className='New'>
       <div className="title">
         <h1>New Recommendation</h1>
-        <button className="btn clickable">New Restaurant</button>
+        <AddButton onClick={() => window.location.href='/new/restaurant'} text="Add New Restaurant"/>
       </div>
       <div>
         {restaurantList}

@@ -1,16 +1,14 @@
-import Image from 'next/image';
+import '../../styles/LogInSignUp.scss';
+
+import FormTitle from '@/components/FormTitle';
 import HomeForm from '@/components/HomeForm';
 
-import '../../styles/LogInSignUp.scss';
 
 export default function LogIn() {
 
   return (
     <div className='Form'>
-      <div className='title'>
-        <h1>Log In</h1>
-        <a href='/' className='clickable'><Image src='/back.png' alt='back' width={58} height={58}/></a>
-      </div>
+      <FormTitle text="Log In" redirect='/'/>
       <HomeForm/>
     </div>
   )

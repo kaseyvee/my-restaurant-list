@@ -1,0 +1,45 @@
+@import './global.scss';
+
+.NewRestaurant {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .FormTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+
+    h1 {
+      width: 60%;
+    }
+  }
+
+  form {
+    width: 80%;
+
+    p {
+      text-align: center;
+    }
+
+    label {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem 0;
+      margin: 1rem 0;
+      border: 1px dashed $grey;
+      color: $grey;
+
+      input[type="file"] {
+        display: none;
+      }
+
+      img {
+        margin-right: 1rem;
+      }
+    }
+  }
+}
