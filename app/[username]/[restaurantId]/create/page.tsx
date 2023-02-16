@@ -47,6 +47,21 @@ export default function Create({ params }: any) {
     };
 
     await pb.collection('menu_items').create(data);
+    const restaurant = await pb.collection('restaurants').getOne(params.restaurantId);
+
+    let ratingToChange: any = {};
+
+    if (rating == 1) {
+      ratingToChange["one_stars"] = Number(restaurant.one_stars) + 1
+    }
+    if (rating == 2) {
+      ratingToChange["two_stars"] = Number(restaurant.two_stars) + 1
+    }
+    if (rating == 3) {
+      ratingToChange["three_stars"] = Number(restaurant.three_stars) + 1
+    }
+
+    await pb.collection('restaurants').update(restaurant.id, ratingToChange);
   }
 
   async function handleCreateItem(e: any) {
