@@ -13,6 +13,8 @@ import AddButton from "@/components/AddButton";
 export default function New() {
   const [restaurants, setRestaurants] = useState<any>([]);
 
+  const loggedInUser: any = pb.authStore.model;
+
   const router = useRouter();
 
   useEffect(() => {
@@ -28,7 +30,7 @@ export default function New() {
 
   const restaurantList = restaurants.map((restaurant: any) => {
     return (
-      <a href={`/${restaurant.id}/create`} key={restaurant.id}>
+      <a href={`/${loggedInUser.username}/${restaurant.id}/create`} key={restaurant.id}>
         <RestaurantItem restaurant={restaurant}/>
       </a>
     )

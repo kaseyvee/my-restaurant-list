@@ -35,7 +35,7 @@ export default function NewRestaurant() {
   async function handleCreateRestaurantRequest(image = '') {
     const data = {
       "name": name.current && name.current.value,
-      "address": address.current && address.current.value,
+      "address": (address.current && address.current.value) || '',
       image,
       "user_id": loggedInUser.id,
     };
@@ -49,9 +49,8 @@ export default function NewRestaurant() {
     e.preventDefault();
     setError('');
 
-    if ((name.current && !name.current.value) || (address.current && !address.current.value)) {
-      console.log("first check")
-      return setError("Please fill out all fields.");
+    if (name.current && !name.current.value) {
+      return setError("Please enter the name.");
     }
 
     if (imageUpload) {
