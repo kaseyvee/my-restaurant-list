@@ -10,9 +10,7 @@ export default async function Profile({ params }: any) {
 
   const restaurantList = userRestaurants.map((restaurant) => {
     return (
-      <a href={`/${user.username}/${restaurant.id}`} key={restaurant.id}>
-        <RestaurantItem restaurant={restaurant}/>
-      </a>
+      <RestaurantItem key={restaurant.id} restaurant={restaurant} user={user}/>
     )
   })
 

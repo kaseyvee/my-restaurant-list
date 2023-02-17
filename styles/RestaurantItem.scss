@@ -9,8 +9,22 @@
   min-height: 12rem;
   font-weight: bold;
 
-  .title {
+  .title-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: start;
     margin: 1.5rem;
+
+    .title {
+      width: 90%;
+
+      .options {
+        width: 26px;
+        height: 26px;
+        z-index: 1;
+      }
+    }
 
     h1, h4 {
       margin: 0;

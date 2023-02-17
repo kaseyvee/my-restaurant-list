@@ -5,4 +5,11 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  .users-favourites-at {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 0;
+    width: 80%;
+  }
 }

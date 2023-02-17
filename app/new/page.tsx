@@ -7,7 +7,6 @@ import getUserRestaurants from "@/helpers/getUserRestaurants";
 import RestaurantItem from "@/components/RestaurantItem";
 
 import '../../styles/New.scss';
-import Image from "next/image";
 import AddButton from "@/components/AddButton";
 
 export default function New() {
@@ -22,7 +21,6 @@ export default function New() {
       return router.push('/login');
     }
 
-    const loggedInUser: any = pb.authStore.model;
     getUserRestaurants(loggedInUser.id)
       .then((restaurants) => setRestaurants(restaurants))
       .catch(e => console.log(e.message));

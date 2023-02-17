@@ -70,7 +70,7 @@ export default function HomeForm(props: any) {
 
     const data = {
       "email": email.current && email.current.value,
-      "username": username.current && username.current.value,
+      "username": username.current && username.current.value.toLowerCase(),
       "emailVisibility": true,
       "password": password.current && password.current.value,
       "passwordConfirm": passwordConfirm.current && passwordConfirm.current.value,
