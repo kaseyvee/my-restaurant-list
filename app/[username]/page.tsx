@@ -27,10 +27,10 @@ export default async function Profile({ params }: any) {
       </div>
       <div className='profile-nav'>
         <div className='profile-nav-item newest'>
-          Newest
+          Favourites
         </div>
         <div className='profile-nav-item'>
-          Closest
+          Saved
         </div>
       </div>
       <div className='restaurants-container'>

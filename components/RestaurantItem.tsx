@@ -1,12 +1,16 @@
 'use client';
 
-import Image from "next/legacy/image";
 import { useState } from "react";
+import { pb } from "@/helpers/dbconnect";
+import { useRouter } from 'next/navigation';
+import Image from "next/legacy/image";
 import '../styles/RestaurantItem.scss';
 
 export default function RestaurantItem({ restaurant, user, view }: any) {
   const [openOptions, setOpenOptions] = useState(false);
   const [clipboardCopy, setClipboardCopy] = useState(false);
+
+  const router = useRouter();
 
   function handleToggleOptions() {
     setClipboardCopy(false);
@@ -14,7 +18,10 @@ export default function RestaurantItem({ restaurant, user, view }: any) {
   }
 
   async function handleDeleteRestaurant() {
+    await pb.collection('restaurants').delete(restaurant.id);
+    router.refresh();
   }
+
   
   function handleShareRestaurant() {
     navigator.clipboard.writeText(`http://localhost:3000/${user.username}/${restaurant.id}`)
@@ -62,7 +69,7 @@ export default function RestaurantItem({ restaurant, user, view }: any) {
           <div className="share option-item" onClick={handleShareRestaurant}>
             {clipboardCopy ? "Copied to clipboard!" : "Share"}
           </div>
-          <div className="delete option-item">
+          <div className="delete option-item" onClick={handleDeleteRestaurant}>
             Delete
           </div>
         </>}
