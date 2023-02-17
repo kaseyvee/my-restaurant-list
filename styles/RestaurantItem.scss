@@ -12,18 +12,16 @@
   .title-container {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    align-items: start;
     margin: 1.5rem;
     
     .recView {
       margin: 0;
       font-weight: 400;
     }
-
+    
     .sub-title-container {
       display: flex;
-
+      justify-content: space-between;
 
       .title {
         width: 90%;
