@@ -11,27 +11,37 @@
 
   .title-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     align-items: start;
     margin: 1.5rem;
-
-    .title {
-      width: 90%;
-
-      .options {
-        width: 26px;
-        height: 26px;
-        z-index: 1;
-      }
-    }
-
-    h1, h4 {
+    
+    .recView {
       margin: 0;
+      font-weight: 400;
     }
 
-    h4 {
-      font-weight: 400;
+    .sub-title-container {
+      display: flex;
+
+
+      .title {
+        width: 90%;
+  
+        .options {
+          width: 26px;
+          height: 26px;
+          z-index: 1;
+        }
+      }
+  
+      h1, h4 {
+        margin: 0;
+      }
+  
+      h4 {
+        font-weight: 400;
+      }
     }
   }
 

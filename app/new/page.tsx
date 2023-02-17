@@ -29,14 +29,14 @@ export default function New() {
   const restaurantList = restaurants.map((restaurant: any) => {
     return (
       <a href={`/${loggedInUser.username}/${restaurant.id}/create`} key={restaurant.id}>
-        <RestaurantItem restaurant={restaurant}/>
+        <RestaurantItem restaurant={restaurant} user={loggedInUser} newView={true}/>
       </a>
     )
   })
 
   return (
     <div className='New'>
-      <div className="title">
+      <div className="header">
         <h1>New Recommendation</h1>
         <AddButton onClick={() => window.location.href='/new/restaurant'} text="Add New Restaurant"/>
       </div>

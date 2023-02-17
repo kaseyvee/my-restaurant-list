@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import Image from "next/legacy/image";
 import '../styles/RestaurantItem.scss';
 
-export default function RestaurantItem({ restaurant, user, view }: any) {
+export default function RestaurantItem({ restaurant, user, newView, recView }: any) {
   const [openOptions, setOpenOptions] = useState(false);
   const [clipboardCopy, setClipboardCopy] = useState(false);
 
@@ -36,18 +36,29 @@ export default function RestaurantItem({ restaurant, user, view }: any) {
   return (
     <div className='RestaurantItem' style={restaurant.image ? restaurantImage : {}}>
       <div className='title-container'>
-        <a className="title" href={`/${user.username}/${restaurant.id}`}>
-          <h1>{restaurant.name}</h1>
-          {restaurant.address && <h4>{restaurant.address}</h4>}
-        </a>
-        <div className="options">
-          <Image
-            src='/dots.png'
-            alt='options'
-            width={26}
-            height={7}
-            onClick={handleToggleOptions}
-          />
+        {recView && <h4 className="recView">
+          <a href={`/${user.username}`}><strong>
+              @{user.username}&apos;s
+          </strong></a> favourites at
+        </h4>}
+        <div className='sub-title-container'>
+          {!newView && <a className="title" href={`/${user.username}/${restaurant.id}`}>
+            <h1>{restaurant.name}</h1>
+            {restaurant.address && <h4>{restaurant.address}</h4>}
+          </a>}
+          {newView && <div className="title">
+            <h1>{restaurant.name}</h1>
+            {restaurant.address && <h4>{restaurant.address}</h4>}
+          </div>}
+          <div className="options">
+            <Image
+              src='/dots.png'
+              alt='options'
+              width={26}
+              height={7}
+              onClick={handleToggleOptions}
+            />
+          </div>
         </div>
       </div>
       <div className='star-container'>
