@@ -38,16 +38,35 @@
   .star-container {
     display: flex;
     justify-content: space-around;
-    margin: 1rem;
+    // margin: 1rem;
+    height: 51px;
   
     .star-item {
       display: flex;
       justify-content: center;
       align-items: center;
+      margin-bottom: 2rem;
 
       p {
         margin-right: 1rem;
       }
+    }
+
+    .option-item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 50%;
+    }
+
+    .share {
+      background: linear-gradient(#ffa8008a, #ffa8008a
+      );
+    }
+
+    .delete {
+      background: linear-gradient(#C757348a, #C757348a
+      );
     }
   }
 }
