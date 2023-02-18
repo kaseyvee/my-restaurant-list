@@ -1,16 +1,15 @@
 'use client';
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { pb } from "@/helpers/dbconnect";
 import { useRouter } from 'next/navigation';
 import Image from "next/legacy/image";
 import '../styles/RestaurantItem.scss';
 
-export default function RestaurantItem({ restaurant, user, newView, recView, savedRestaurant }: any) {
+export default function RestaurantItem({ restaurant, loggedInUser, user, newView, recView, savedRestaurant }: any) {
   const [openOptions, setOpenOptions] = useState(false);
   const [clipboardCopy, setClipboardCopy] = useState(false);
 
-  const loggedInUser: any = pb.authStore.model;
   const router = useRouter();
 
   function handleToggleOptions() {
@@ -28,22 +27,24 @@ export default function RestaurantItem({ restaurant, user, newView, recView, sav
     setClipboardCopy(true);
   }
 
-  async function handleSaveRestaurant() {
+  async function handleSaveRestaurant(e: any) {
+
     if (!loggedInUser) {
       return router.push('/login');
     }
 
-    if (savedRestaurant) {
+    if (savedRestaurant === null) {
       const data = {
         "user_id": loggedInUser.id,
         "restaurant_id": restaurant.id
     };
     
-      return await pb.collection('saved_rec_lists').create(data);
+      await pb.collection('saved_rec_lists').create(data);
+      return window.location.reload();
     }
 
     await pb.collection('saved_rec_lists').delete(savedRestaurant.id);
-    router.refresh();
+    return window.location.reload();
   }
 
   const restaurantImage = {
@@ -102,7 +103,7 @@ export default function RestaurantItem({ restaurant, user, newView, recView, sav
             Delete
           </div>}
           {((loggedInUser && (user.id !== loggedInUser.id)) || !loggedInUser) &&
-          <div className="save option-item" onClick={handleSaveRestaurant}>
+          <div className="save option-item" onClick={(e) => handleSaveRestaurant(e)}>
             {savedRestaurant ? "Unsave" : "Save"}
           </div>}
         </>}

@@ -2,7 +2,6 @@ import '../../../styles/Menu.scss';
 import MenuItem from '@/components/MenuItem';
 import PocketBase from 'pocketbase';
 import RestaurantItem from '@/components/RestaurantItem';
-import Image from 'next/image';
 
 const pb = new PocketBase('http://127.0.0.1:8090');
 

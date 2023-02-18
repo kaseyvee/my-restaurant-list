@@ -8,7 +8,7 @@ import '../styles/Nav.scss';
 
 export default function Nav() {
   const [openNav, setOpenNav] = useState(false);
-  const [loggedInUser, setLoggedInUser] = useState<any>(null) 
+  const [loggedInUser, setLoggedInUser] = useState<any>(null);
 
   useEffect(() => {
     setOpenNav(false);
@@ -53,9 +53,9 @@ export default function Nav() {
             <a href={`/${loggedInUser.username}`} className='nav-item clickable'>
               My Profile
             </a>
-            <div className='nav-item clickable'>
-              Saved Recommendations
-            </div>
+            <a href='https://github.com/kaseyvee/my-restaurant-list' className='nav-item clickable'>
+              GitHub
+            </a>
             <div className='nav-item clickable log-out' onClick={handleLogOut}>
               Log Out
             </div>

@@ -1,32 +1,12 @@
 import { pb } from "@/helpers/dbconnect";
 import Image from "next/image";
 import '../../styles/Profile.scss';
-import RestaurantItem from '@/components/RestaurantItem';
+import RestaurantList from "@/components/RestaurantList";
 import getUserRestaurants from "@/helpers/getUserRestaurants";
-import getSavedRestaurants from "@/helpers/getSavedRestaurants";
 
 export default async function Profile({ params }: any) {
   const user = await pb.collection('users').getFirstListItem(`username="${params.username}"`);
   const userRestaurants = await getUserRestaurants(user.id);
-
-  const loggedInUser: any = pb.authStore.model || null;
-  let savedRestaurants: any = [];
-  if (loggedInUser) {
-    savedRestaurants = await getSavedRestaurants(loggedInUser.id);
-  }
-  
-  function checkSavedRestaurants(restaurantId: string) {
-    const foundRestaurant = savedRestaurants.find((restaurant: any) => restaurant.restaurant_id === restaurantId);
-
-    if (foundRestaurant) return foundRestaurant;
-    return null;
-  }
-
-  const restaurantList = userRestaurants.map((restaurant) => {
-    return (
-      <RestaurantItem savedRestaurant={checkSavedRestaurants(restaurant.id)} key={restaurant.id} restaurant={restaurant} user={user}/>
-    )
-  })
 
   return (
     <div className='Profile'>
@@ -49,7 +29,10 @@ export default async function Profile({ params }: any) {
       </div>
       <div className='restaurants-container'>
         <h1>{user.username}&apos;s newest favourites</h1>
-        {restaurantList}
+        <RestaurantList
+          user={user}
+          userRestaurants={userRestaurants}
+        />
       </div>
     </div>
   )

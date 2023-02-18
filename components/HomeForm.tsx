@@ -35,12 +35,11 @@ export default function HomeForm(props: any) {
 
     if (email.current && password.current) {
       try {
-        const authData = await pb.collection('users').authWithPassword(
+        await pb.collection('users').authWithPassword(
           email.current.value,
           password.current.value,
         );
-        console.log("authData: ", authData);
-        router.push(`/${authData.record.username}`);
+        window.location.reload();
       } catch(e) {
         setError("Invalid email or password.");
         setLoading(false);
