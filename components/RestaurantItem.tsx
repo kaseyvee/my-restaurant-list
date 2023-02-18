@@ -10,6 +10,7 @@ export default function RestaurantItem({ restaurant, user, newView, recView }: a
   const [openOptions, setOpenOptions] = useState(false);
   const [clipboardCopy, setClipboardCopy] = useState(false);
 
+  const loggedInUser: any = pb.authStore.model;
   const router = useRouter();
 
   function handleToggleOptions() {
@@ -21,7 +22,6 @@ export default function RestaurantItem({ restaurant, user, newView, recView }: a
     await pb.collection('restaurants').delete(restaurant.id);
     router.refresh();
   }
-
   
   function handleShareRestaurant() {
     navigator.clipboard.writeText(`http://localhost:3000/${user.username}/${restaurant.id}`)
@@ -31,6 +31,10 @@ export default function RestaurantItem({ restaurant, user, newView, recView }: a
   const restaurantImage = {
     background: `linear-gradient(#0000008a, #000000a7
       ), center/cover url('${restaurant.image ? restaurant.image : null}')`
+  }
+
+  const shareWidth = {
+    width: "100%"
   }
 
   return (
@@ -77,12 +81,12 @@ export default function RestaurantItem({ restaurant, user, newView, recView }: a
           </div>
         </>}
         {openOptions && <>
-          <div className="share option-item" onClick={handleShareRestaurant}>
+          <div className="share option-item" onClick={handleShareRestaurant} style={(loggedInUser && (user.id === loggedInUser.id)) ? {} : shareWidth}>
             {clipboardCopy ? "Copied to clipboard!" : "Share"}
           </div>
-          <div className="delete option-item" onClick={handleDeleteRestaurant}>
+          {(loggedInUser && (user.id === loggedInUser.id)) && <div className="delete option-item" onClick={handleDeleteRestaurant}>
             Delete
-          </div>
+          </div>}
         </>}
       </div>
     </div>
