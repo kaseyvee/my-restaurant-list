@@ -6,4 +6,4 @@ A straight-to-the-point restaurant and food recommendations app. What this app <
 
 ## Preview
 
-![Preview Images](https://i.imgur.com/7fP0gRU.png)
+![Preview Images](https://i.imgur.com/7fP0gRU.png?1)
