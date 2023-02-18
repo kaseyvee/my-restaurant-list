@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import Image from "next/legacy/image";
 import '../styles/RestaurantItem.scss';
 
-export default function RestaurantItem({ restaurant, user, newView, recView }: any) {
+export default function RestaurantItem({ restaurant, user, newView, recView, savedRestaurant }: any) {
   const [openOptions, setOpenOptions] = useState(false);
   const [clipboardCopy, setClipboardCopy] = useState(false);
 
@@ -28,13 +28,27 @@ export default function RestaurantItem({ restaurant, user, newView, recView }: a
     setClipboardCopy(true);
   }
 
+  async function handleSaveRestaurant() {
+    if (!loggedInUser) {
+      return router.push('/login');
+    }
+
+    if (savedRestaurant) {
+      const data = {
+        "user_id": loggedInUser.id,
+        "restaurant_id": restaurant.id
+    };
+    
+      return await pb.collection('saved_rec_lists').create(data);
+    }
+
+    await pb.collection('saved_rec_lists').delete(savedRestaurant.id);
+    router.refresh();
+  }
+
   const restaurantImage = {
     background: `linear-gradient(#0000008a, #000000a7
       ), center/cover url('${restaurant.image ? restaurant.image : null}')`
-  }
-
-  const shareWidth = {
-    width: "100%"
   }
 
   return (
@@ -81,11 +95,15 @@ export default function RestaurantItem({ restaurant, user, newView, recView }: a
           </div>
         </>}
         {openOptions && <>
-          <div className="share option-item" onClick={handleShareRestaurant} style={(loggedInUser && (user.id === loggedInUser.id)) ? {} : shareWidth}>
+          <div className="share option-item" onClick={handleShareRestaurant}>
             {clipboardCopy ? "Copied to clipboard!" : "Share"}
           </div>
           {(loggedInUser && (user.id === loggedInUser.id)) && <div className="delete option-item" onClick={handleDeleteRestaurant}>
             Delete
+          </div>}
+          {((loggedInUser && (user.id !== loggedInUser.id)) || !loggedInUser) &&
+          <div className="save option-item" onClick={handleSaveRestaurant}>
+            {savedRestaurant ? "Unsave" : "Save"}
           </div>}
         </>}
       </div>
