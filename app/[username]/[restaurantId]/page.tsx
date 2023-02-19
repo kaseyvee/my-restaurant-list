@@ -1,9 +1,7 @@
-import '../../../styles/Menu.scss';
+import { pb } from '@/helpers/dbconnect';
 import MenuItem from '@/components/MenuItem';
-import PocketBase from 'pocketbase';
 import RestaurantItem from '@/components/RestaurantItem';
-
-const pb = new PocketBase('http://127.0.0.1:8090');
+import '../../../styles/Menu.scss';
 
 export default async function Menu({ params }: any) {
   const restaurant = await pb.collection('restaurants').getOne(params.restaurantId);

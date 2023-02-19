@@ -1,8 +1,8 @@
 'use client';
 
+import { useEffect, useState } from "react";
 import { pb } from "@/helpers/dbconnect";
 import getSavedRestaurants from "@/helpers/getSavedRestaurants";
-import { useEffect, useState } from "react";
 import RestaurantItem from "./RestaurantItem"
 
 export default function RestaurantList({ user, userRestaurants }: any) {
@@ -29,7 +29,6 @@ export default function RestaurantList({ user, userRestaurants }: any) {
         key={restaurant.id}
         savedRestaurant={checkSavedRestaurants(restaurant.id)}
         restaurant={restaurant}
-        loggedInUser={loggedInUser}
         user={user}
       />
     )

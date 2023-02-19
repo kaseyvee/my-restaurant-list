@@ -1,15 +1,16 @@
 'use client';
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { pb } from "@/helpers/dbconnect";
 import { useRouter } from 'next/navigation';
 import Image from "next/legacy/image";
 import '../styles/RestaurantItem.scss';
 
-export default function RestaurantItem({ restaurant, loggedInUser, user, newView, recView, savedRestaurant }: any) {
+export default function RestaurantItem({ restaurant, user, newView, recView, savedRestaurant }: any) {
   const [openOptions, setOpenOptions] = useState(false);
   const [clipboardCopy, setClipboardCopy] = useState(false);
 
+  const loggedInUser = pb.authStore.model;
   const router = useRouter();
 
   function handleToggleOptions() {
@@ -27,8 +28,7 @@ export default function RestaurantItem({ restaurant, loggedInUser, user, newView
     setClipboardCopy(true);
   }
 
-  async function handleSaveRestaurant(e: any) {
-
+  async function handleSaveRestaurant() {
     if (!loggedInUser) {
       return router.push('/login');
     }
@@ -69,7 +69,7 @@ export default function RestaurantItem({ restaurant, loggedInUser, user, newView
             <h1>{restaurant.name}</h1>
             {restaurant.address && <h4>{restaurant.address}</h4>}
           </div>}
-          <div className="options">
+          {!newView && <div className="options">
             <Image
               src='/dots.png'
               alt='options'
@@ -77,7 +77,7 @@ export default function RestaurantItem({ restaurant, loggedInUser, user, newView
               height={7}
               onClick={handleToggleOptions}
             />
-          </div>
+          </div>}
         </div>
       </div>
       <div className='star-container'>
@@ -97,14 +97,14 @@ export default function RestaurantItem({ restaurant, loggedInUser, user, newView
         </>}
         {openOptions && <>
           <div className="share option-item" onClick={handleShareRestaurant}>
-            {clipboardCopy ? "Copied to clipboard!" : "Share"}
+            {clipboardCopy ? "Clipboarded!" : "Share"}
           </div>
-          {(loggedInUser && (user.id === loggedInUser.id)) && <div className="delete option-item" onClick={handleDeleteRestaurant}>
-            Delete
-          </div>}
-          {((loggedInUser && (user.id !== loggedInUser.id)) || !loggedInUser) &&
-          <div className="save option-item" onClick={(e) => handleSaveRestaurant(e)}>
+          {((loggedInUser && (restaurant.user_id !== loggedInUser.id)) || !loggedInUser) &&
+          <div className="save option-item" onClick={handleSaveRestaurant}>
             {savedRestaurant ? "Unsave" : "Save"}
+          </div>}
+          {(loggedInUser && (restaurant.user_id === loggedInUser.id)) && <div className="delete option-item" onClick={handleDeleteRestaurant}>
+            Delete
           </div>}
         </>}
       </div>
