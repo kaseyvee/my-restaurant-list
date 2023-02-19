@@ -8,6 +8,9 @@ export default function ShareProfileButton({ user }: any) {
   function handleShareProfile() {
     navigator.clipboard.writeText(`http://localhost:3000/${user.username}`)
     setClipboardCopy(true);
+    setTimeout(() => {
+      setClipboardCopy(false);
+    }, 3000);
   }
 
   return (

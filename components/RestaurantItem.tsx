@@ -26,6 +26,9 @@ export default function RestaurantItem({ restaurant, user, newView, recView, sav
   function handleShareRestaurant() {
     navigator.clipboard.writeText(`http://localhost:3000/${user.username}/${restaurant.id}`)
     setClipboardCopy(true);
+    setTimeout(() => {
+      setClipboardCopy(false);
+    }, 3000);
   }
 
   async function handleSaveRestaurant() {
@@ -69,13 +72,12 @@ export default function RestaurantItem({ restaurant, user, newView, recView, sav
             <h1>{restaurant.name}</h1>
             {restaurant.address && <h4>{restaurant.address}</h4>}
           </div>}
-          {!newView && <div className="options">
+          {!newView && <div className="options" onClick={handleToggleOptions}>
             <Image
               src='/dots.png'
               alt='options'
               width={26}
               height={7}
-              onClick={handleToggleOptions}
             />
           </div>}
         </div>

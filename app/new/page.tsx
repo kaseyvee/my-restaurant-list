@@ -40,7 +40,7 @@ export default function New() {
         <h1>New Recommendation</h1>
         <AddButton onClick={() => window.location.href='/new/restaurant'} text="Add New Restaurant"/>
       </div>
-      <div>
+      <div className="restaurant-container">
         {restaurantList}
       </div>
     </div>

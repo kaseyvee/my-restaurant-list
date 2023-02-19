@@ -5,9 +5,16 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  max-width: 40rem;
 
   .header {
     width: 80%;
     margin-bottom: 2rem;
+  }
+
+  .restaurant-container {
+    width: 100%;
+    max-width: 40rem;
   }
 }
