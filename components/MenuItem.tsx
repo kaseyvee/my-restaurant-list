@@ -4,10 +4,18 @@ import { useRouter } from 'next/navigation';
 import { pb } from '@/helpers/dbconnect';
 import '../styles/MenuItem.scss'
 import Image from "next/legacy/image";
+import { useEffect, useState } from 'react';
 
-export default function MenuItem({ menuItem }: any) {
+export default function MenuItem({ menuItem, user }: any) {
   const router = useRouter();
+  const [loggedInUser, setLoggedInUser] = useState<any>(null);
 
+  useEffect(() => {
+    if (pb.authStore.isValid) {
+      setLoggedInUser(pb.authStore.model);
+    }
+  }, [])
+  
   async function handleDeleteItem() {
     await pb.collection('menu_items').delete(menuItem.id);
     router.refresh();
@@ -44,7 +52,7 @@ export default function MenuItem({ menuItem }: any) {
           </div>
         </div>
         <p>{menuItem.notes}</p>
-        <div className='delete' onClick={handleDeleteItem}>Delete</div>
+        {(loggedInUser && loggedInUser.id === user.id) && <div className='delete' onClick={handleDeleteItem}>Delete</div>}
       </div>
     </div>
   );
