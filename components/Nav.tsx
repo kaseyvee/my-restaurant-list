@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { pb } from '@/helpers/dbconnect';
 import Image from "next/image";
@@ -9,13 +9,21 @@ import '../styles/Nav.scss';
 export default function Nav() {
   const [openNav, setOpenNav] = useState(false);
   const [loggedInUser, setLoggedInUser] = useState<any>(null);
+  const clickRef = useRef<any>(null);
 
   useEffect(() => {
     setOpenNav(false);
     if (pb.authStore.isValid) {
       setLoggedInUser(pb.authStore.model);
     }
+    document.addEventListener("click", handleOutsideMenuClick, true);
   }, [])
+
+  function handleOutsideMenuClick(e: any) {
+    if (!clickRef.current.contains(e.target)) {
+      setOpenNav(false);
+    }
+  }
 
   const router = useRouter();
 
@@ -35,7 +43,7 @@ export default function Nav() {
   }
 
   return (
-    <div className='Nav'>
+    <div className='Nav' ref={clickRef}>
       <button
         className='avatar'
         style={openNav ? avatarStyles : {}}

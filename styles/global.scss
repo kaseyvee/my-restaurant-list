@@ -55,10 +55,10 @@ html {
       margin: 0.5rem 0;
       padding: 1rem;
       color: inherit;
-      background-color: $orange;
+      background-color: transparent;
       font-weight: bold;
       font-size: 1.25rem;
-      border: 0;
+      border: 1px solid $white;
       border-radius: 10px;
       width: 100%;
 

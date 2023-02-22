@@ -4,16 +4,15 @@ import { useEffect, useState } from "react";
 import { pb } from "@/helpers/dbconnect";
 import { useRouter } from 'next/navigation';
 import getUserRestaurants from "@/helpers/getUserRestaurants";
-import RestaurantItem from "@/components/RestaurantItem";
-
 import '../../styles/New.scss';
+
+import RestaurantItem from "@/components/RestaurantItem";
 import AddButton from "@/components/AddButton";
 
 export default function New() {
   const [restaurants, setRestaurants] = useState<any>([]);
 
   const loggedInUser: any = pb.authStore.model;
-
   const router = useRouter();
 
   useEffect(() => {

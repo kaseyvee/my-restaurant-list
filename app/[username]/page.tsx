@@ -1,8 +1,10 @@
 import { pb } from "@/helpers/dbconnect";
 import Image from "next/image";
-import '../../styles/Profile.scss';
-import RestaurantList from "@/components/RestaurantList";
 import getUserRestaurants from "@/helpers/getUserRestaurants";
+
+import '../../styles/Profile.scss';
+
+import RestaurantList from "@/components/RestaurantList";
 import ShareProfileButton from "@/components/ShareProfileButton";
 import ProfileNav from "@/components/ProfileNav";
 

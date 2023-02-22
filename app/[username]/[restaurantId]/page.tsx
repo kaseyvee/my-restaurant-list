@@ -1,7 +1,9 @@
 import { pb } from '@/helpers/dbconnect';
+
+import '../../../styles/Menu.scss';
+
 import MenuItem from '@/components/MenuItem';
 import RestaurantItem from '@/components/RestaurantItem';
-import '../../../styles/Menu.scss';
 
 export default async function Menu({ params }: any) {
   const restaurant = await pb.collection('restaurants').getOne(params.restaurantId);

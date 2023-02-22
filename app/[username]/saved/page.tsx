@@ -1,10 +1,12 @@
 import { pb } from "@/helpers/dbconnect";
+import getSavedRestaurants from "@/helpers/getSavedRestaurants";
 import Image from "next/image";
+
 import '../../../styles/Profile.scss';
+
 import RestaurantList from "@/components/RestaurantList";
 import ShareProfileButton from "@/components/ShareProfileButton";
 import ProfileNav from "@/components/ProfileNav";
-import getSavedRestaurants from "@/helpers/getSavedRestaurants";
 
 export default async function Profile({ params }: any) {
   const user = await pb.collection('users').getFirstListItem(`username="${params.username}"`);
