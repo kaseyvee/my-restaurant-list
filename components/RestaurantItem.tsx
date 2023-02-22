@@ -10,7 +10,7 @@ export default function RestaurantItem({ restaurant, user, newView, recView, sav
   const [openOptions, setOpenOptions] = useState(false);
   const [clipboardCopy, setClipboardCopy] = useState(false);
 
-  const savedRestaurantUser = savedRestaurant && savedRestaurant.expand.restaurant_id.expand.user_id || null;
+  const restaurantUser = restaurant.expand.user_id;
   const loggedInUser = pb.authStore.model;
   
   const router = useRouter();
@@ -22,6 +22,7 @@ export default function RestaurantItem({ restaurant, user, newView, recView, sav
 
   async function handleDeleteRestaurant() {
     await pb.collection('restaurants').delete(restaurant.id);
+    if (recView) return router.push(`/${user.username}`);
     router.refresh();
   }
   
@@ -65,9 +66,9 @@ export default function RestaurantItem({ restaurant, user, newView, recView, sav
               @{user.username}&apos;s
           </strong></a> favourites at
         </h4>}
-        {(savedRestaurant && savedView) && <h4 className="recView">
-          <a href={`/${savedRestaurantUser.username}`}><strong>
-              @{savedRestaurantUser.username}&apos;s
+        {restaurantUser && savedView && <h4 className="recView">
+          <a href={`/${restaurantUser.username}`}><strong>
+              @{restaurantUser.username}&apos;s
           </strong></a> favourites at
         </h4>}
         <div className='sub-title-container'>
