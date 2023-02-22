@@ -6,7 +6,7 @@ export default function ShareProfileButton({ user }: any) {
   const [clipboardCopy, setClipboardCopy] = useState(false);
 
   function handleShareProfile() {
-    navigator.clipboard.writeText(`http://localhost:3000/${user.username}`)
+    navigator.clipboard.writeText(`http://localhost:3000/${user.username || null}`)
     setClipboardCopy(true);
     setTimeout(() => {
       setClipboardCopy(false);
