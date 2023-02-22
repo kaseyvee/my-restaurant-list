@@ -5,7 +5,7 @@ import { pb } from "@/helpers/dbconnect";
 import getSavedRestaurants from "@/helpers/getSavedRestaurants";
 import RestaurantItem from "./RestaurantItem"
 
-export default function RestaurantList({ user, userRestaurants }: any) {
+export default function RestaurantList({ user, userRestaurants, savedView }: any) {
   const [savedRestaurants, setSavedRestaunts] = useState([]);
   const loggedInUser = pb.authStore.model;
 
@@ -30,6 +30,7 @@ export default function RestaurantList({ user, userRestaurants }: any) {
         savedRestaurant={checkSavedRestaurants(restaurant.id)}
         restaurant={restaurant}
         user={user}
+        savedView={savedView ? true : false}
       />
     )
   })

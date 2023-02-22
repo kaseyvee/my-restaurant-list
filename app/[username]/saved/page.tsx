@@ -31,6 +31,7 @@ export default async function Profile({ params }: any) {
         <RestaurantList
           user={user}
           userRestaurants={processedSavedRestaurants}
+          savedView={true}
         />
       </div>
     </div>

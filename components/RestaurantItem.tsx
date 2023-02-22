@@ -6,11 +6,13 @@ import { useRouter } from 'next/navigation';
 import Image from "next/legacy/image";
 import '../styles/RestaurantItem.scss';
 
-export default function RestaurantItem({ restaurant, user, newView, recView, savedRestaurant }: any) {
+export default function RestaurantItem({ restaurant, user, newView, recView, savedView, savedRestaurant }: any) {
   const [openOptions, setOpenOptions] = useState(false);
   const [clipboardCopy, setClipboardCopy] = useState(false);
 
+  const savedRestaurantUser = savedRestaurant && savedRestaurant.expand.restaurant_id.expand.user_id || null;
   const loggedInUser = pb.authStore.model;
+  
   const router = useRouter();
 
   function handleToggleOptions() {
@@ -61,6 +63,11 @@ export default function RestaurantItem({ restaurant, user, newView, recView, sav
         {recView && <h4 className="recView">
           <a href={`/${user.username}`}><strong>
               @{user.username}&apos;s
+          </strong></a> favourites at
+        </h4>}
+        {(savedRestaurant && savedView) && <h4 className="recView">
+          <a href={`/${savedRestaurantUser.username}`}><strong>
+              @{savedRestaurantUser.username}&apos;s
           </strong></a> favourites at
         </h4>}
         <div className='sub-title-container'>
