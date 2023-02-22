@@ -44,11 +44,11 @@
     cursor: pointer;
 
     &:hover {
-      background: linear-gradient(#a445288a, #a445288a);
+      filter: brightness(1.2);
     }
 
     &:active {
-      
+      filter: brightness(1);
     }
    }
  }

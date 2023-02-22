@@ -24,12 +24,10 @@
 
       .title {
         width: 90%;
-  
-        .options {
-          width: 26px;
-          height: 26px;
-          z-index: 1;
-        }
+      }
+
+      .options {
+        cursor: pointer;
       }
   
       h1, h4 {
@@ -64,6 +62,15 @@
       justify-content: center;
       align-items: center;
       width: 50%;
+      cursor: pointer;
+
+      &:hover {
+        filter: brightness(1.2);
+      }
+
+      &:active {
+        filter: brightness(1);
+      }
     }
     
     .share {
