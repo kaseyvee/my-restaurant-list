@@ -1,8 +1,18 @@
-import '../styles/MenuItem.scss'
+'use client'
 
+import { useRouter } from 'next/navigation';
+import { pb } from '@/helpers/dbconnect';
+import '../styles/MenuItem.scss'
 import Image from "next/legacy/image";
 
-export default function MenuItem({ menuItem, userId }: any) {
+export default function MenuItem({ menuItem }: any) {
+  const router = useRouter();
+
+  async function handleDeleteItem() {
+    await pb.collection('menu_items').delete(menuItem.id);
+    router.refresh();
+  }
+
   function getStars() {
     if (menuItem.rating === 3) {
       return (
@@ -34,6 +44,7 @@ export default function MenuItem({ menuItem, userId }: any) {
           </div>
         </div>
         <p>{menuItem.notes}</p>
+        <div className='delete' onClick={handleDeleteItem}>Delete</div>
       </div>
     </div>
   );
