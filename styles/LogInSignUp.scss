@@ -18,5 +18,18 @@
 
   .HomeForm {
     width: 80%;
+    
+    p {
+      text-align: center;
+    }
+
+    a {
+      color: $orange;
+  
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
+
 }

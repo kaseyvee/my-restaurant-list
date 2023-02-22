@@ -7,3 +7,9 @@ A straight-to-the-point restaurant and food recommendations app. What this app <
 ## Preview
 
 ![Preview Images](https://i.imgur.com/7fP0gRU.png?1)
+
+## Todo
+- add confirmations when deleting
+- edit restaurants and menu items?
+- make look better for desktop
+- make nicer homepage

@@ -61,6 +61,7 @@ html {
       border: 1px solid $white;
       border-radius: 10px;
       width: 100%;
+      cursor: pointer;
 
       &:hover {
         filter: brightness(0.8);

@@ -30,7 +30,6 @@ export default async function Menu({ params }: any) {
         userRestaurants={[restaurant]}
         recView={true}
       />
-      {/* <RestaurantItem user={user} restaurant={restaurant} recView={true}/> */}
       {menuItemList}
     </div>
   )

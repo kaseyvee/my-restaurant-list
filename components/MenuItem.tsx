@@ -18,6 +18,23 @@ export default function MenuItem({ menuItem, user }: any) {
   
   async function handleDeleteItem() {
     await pb.collection('menu_items').delete(menuItem.id);
+
+    const restaurant = await pb.collection('restaurants').getOne(menuItem.restaurant_id);
+
+    let ratingToChange: any = {};
+
+    if (menuItem.rating == 1) {
+      ratingToChange["one_stars"] = Number(restaurant.one_stars) - 1
+    }
+    if (menuItem.rating == 2) {
+      ratingToChange["two_stars"] = Number(restaurant.two_stars) - 1
+    }
+    if (menuItem.rating == 3) {
+      ratingToChange["three_stars"] = Number(restaurant.three_stars) - 1
+    }
+
+    await pb.collection('restaurants').update(restaurant.id, ratingToChange);
+
     router.refresh();
   }
 

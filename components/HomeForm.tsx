@@ -107,6 +107,11 @@ export default function HomeForm(props: any) {
             <button className='btn clickable' type='submit'>{props.signup ? "Sign Up" : "Log In"}</button>
           </form>
           {error && <h4 className='error'>{error}</h4>}
+          {props.signup ?
+            <p>Already have an account? <a href='login'>Log in</a>.</p>
+          :
+            <p>Just joining us? <a href='/signup'>Create an account</a>.</p>
+          }
         </div>
       }
     </>
