@@ -13,3 +13,4 @@ A straight-to-the-point restaurant and food recommendations app. What this app <
 - edit restaurants and menu items?
 - make look better for desktop
 - make nicer homepage
+- make transitions between pages smoother
