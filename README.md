@@ -10,7 +10,8 @@ A straight-to-the-point restaurant and food recommendations app. What this app <
 
 ## Todo
 - add confirmations when deleting
-- edit restaurants and menu items?
+- edit restaurants and menu items
 - make look better for desktop
 - make nicer homepage
-- make transitions between pages smoother
+- make transitions between pages smoother / add loading states
+- use google api to search businesses
