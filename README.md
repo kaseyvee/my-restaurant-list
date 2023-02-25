@@ -15,3 +15,4 @@ A straight-to-the-point restaurant and food recommendations app. What this app <
 - make nicer homepage
 - make transitions between pages smoother / add loading states
 - use google api to search businesses
+- refactor profile page to use state to switch between favourites and saved
