@@ -27,7 +27,7 @@ export default function RestaurantItem({ restaurant, user, newView, recView, sav
   }
   
   function handleShareRestaurant() {
-    navigator.clipboard.writeText(`http://localhost:3000/${user.username}/${restaurant.id}`)
+    navigator.clipboard.writeText(`https://untitled-yum-yum-app.vercel.app/${user.username}/${restaurant.id}`)
     setClipboardCopy(true);
     setTimeout(() => {
       setClipboardCopy(false);
