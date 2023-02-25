@@ -8,6 +8,13 @@ import RestaurantList from "@/components/RestaurantList";
 import ShareProfileButton from "@/components/ShareProfileButton";
 import ProfileNav from "@/components/ProfileNav";
 
+export const dynamic = 'auto',
+  dynamicParams = true,
+  revalidate = 0,
+  fetchCache = 'auto',
+  runtime = 'nodejs',
+  preferredRegion = 'auto'
+
 export default async function Profile({ params }: any) {
   const user = await pb.collection('users').getFirstListItem(`username="${params.username}"`);
   const savedRestaurants = await getSavedRestaurants(user.id);

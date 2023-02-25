@@ -22,7 +22,6 @@ export default function New() {
 
     getUserRestaurants(loggedInUser.id)
       .then((restaurants) => setRestaurants(restaurants))
-      .catch(e => console.log(e.message));
   }, [])
 
   const restaurantList = restaurants.map((restaurant: any) => {
