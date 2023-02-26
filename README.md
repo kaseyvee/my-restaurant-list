@@ -8,12 +8,21 @@ A straight-to-the-point restaurant and food recommendations app. What this app <
 
 ![Preview Images](https://i.imgur.com/7fP0gRU.png?1)
 
+## Dependencies
+- Next.js
+- PocketBase (database and authentication)
+- Firebase (image uploading)
+- Sass
+- UUID
+
+
 ## Todo
 - add confirmations when deleting
 - edit restaurants and menu items
-- make look better for desktop
-- make nicer homepage
+- optimize ui for desktop users
+- add content to homepage
+- show rating definitions
 - make transitions between pages smoother / add loading states
-- use google api to search businesses
+- integrate google api to search businesses / find closest restaurants when viewing profiles
+- connect firebase to pocketbase for s3 storage
 - refactor profile page to use state to switch between favourites and saved
-- 
