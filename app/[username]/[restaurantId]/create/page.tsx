@@ -72,14 +72,21 @@ export default function Create({ params }: any) {
     setError('');
 
     if ((name.current && !name.current.value) || !rating) {
+      setLoading(false);
       return setError("Please enter the name and rating.");
     }
 
     if (imageUpload) {
-      const imageUrl: any = await handleImageUpload();
-      await handleCreateItemRequest(imageUrl);
-
-      return router.push(`/${loggedInUser.username}/${params.restaurantId}`);
+      try {
+        const imageUrl: any = await handleImageUpload();
+        await handleCreateItemRequest(imageUrl);
+  
+        return router.push(`/${loggedInUser.username}/${params.restaurantId}`);
+      }
+      catch(err) {
+        setLoading(false);
+        setError("Something went wrong. :( Try again.");
+      }
     }
 
     if (imageLink.current && imageLink.current.value) {

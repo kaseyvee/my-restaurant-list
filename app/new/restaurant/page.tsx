@@ -57,10 +57,16 @@ export default function NewRestaurant() {
     }
 
     if (imageUpload) {
-      const imageUrl: any = await handleImageUpload();
-      const restaurant = await handleCreateRestaurantRequest(imageUrl);
-
-      return router.push(`/${loggedInUser.username}/${restaurant.id}/create`);
+      try {
+        const imageUrl: any = await handleImageUpload();
+        const restaurant = await handleCreateRestaurantRequest(imageUrl);
+  
+        return router.push(`/${loggedInUser.username}/${restaurant.id}/create`);
+      }
+      catch(err) {
+        setLoading(false);
+        setError("Something went wrong. :( Try again.");
+      }
     }
 
     if (imageLink.current && imageLink.current.value) {
