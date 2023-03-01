@@ -4,6 +4,7 @@ import '../../../styles/Menu.scss';
 
 import MenuItem from '@/components/MenuItem';
 import RestaurantList from '@/components/RestaurantList';
+import LinkButton from '@/components/LinkButton';
 
 export const dynamic = 'auto',
   dynamicParams = true,
@@ -36,9 +37,7 @@ export default async function Menu({ params }: any) {
         userRestaurants={[restaurant]}
         recView={true}
       />
-      <a className='btn' href={`/${user.username}/${params.restaurantId}/create`}>
-        New Item Recommendation
-      </a>
+      <LinkButton text="New Item Recommendation" href={`/${user.username}/${params.restaurantId}/create`} user={user}/>
       {menuItemList}
     </div>
   )
