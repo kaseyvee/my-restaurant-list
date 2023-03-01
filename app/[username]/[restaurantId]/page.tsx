@@ -16,7 +16,7 @@ export default async function Menu({ params }: any) {
   const restaurant = await pb.collection('restaurants').getOne(params.restaurantId, {
     expand: 'user_id'
   });
-  const user = restaurant.expand.user_id || {};
+  const user: any = restaurant.expand.user_id || {};
   const menuItems = await pb.collection('menu_items').getList(1, 50, {
     filter: `restaurant_id = "${params.restaurantId}"`,
     sort: '-created',
@@ -36,6 +36,9 @@ export default async function Menu({ params }: any) {
         userRestaurants={[restaurant]}
         recView={true}
       />
+      <a className='btn' href={`/${user.username}/${params.restaurantId}/create`}>
+        New Item Recommendation
+      </a>
       {menuItemList}
     </div>
   )
