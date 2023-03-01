@@ -4,6 +4,10 @@ $orange: #FFA800;
 $red: #C75734;
 $grey: #4F4747;
 $light-grey: #897B7B;
+$transparent-blue: linear-gradient(#3482c78a, #3482c78a);
+$transparent-orange: linear-gradient(#ffa8008a, #ffa8008a);
+$transparent-green: linear-gradient(#34c7628a, #34c7628a);
+$transparent-red: linear-gradient(#C757348a, #C757348a);
 
 html {
   background-color: $black;
@@ -61,6 +65,13 @@ html {
       border: 1px solid $white;
       border-radius: 10px;
       width: 100%;
+      
+      img {
+        margin-right: 1rem;
+      }
+    }
+
+    .clickable {
       cursor: pointer;
 
       &:hover {
@@ -68,11 +79,7 @@ html {
       }
   
       &:active {
-        filter: brightness(0.5);
-      }
-
-      img {
-        margin-right: 1rem;
+        filter: brightness(1);
       }
     }
 

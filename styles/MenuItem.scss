@@ -34,21 +34,20 @@
     margin: 0;
    }
 
-   .delete {
-    // width: 100%;
-    font-weight: bold;
-    margin-top: 1rem;
-    padding: 1rem;
-    text-align: center;
-    background: linear-gradient(#C757348a, #C757348a);
-    cursor: pointer;
-
-    &:hover {
-      filter: brightness(1.2);
+   .actions {
+    .clickable {
+      font-weight: bold;
+      margin-top: 1rem;
+      padding: 1rem;
+      text-align: center;
     }
 
-    &:active {
-      filter: brightness(1);
+    .delete {
+      background: $transparent-red;
+    }
+
+    .edit {
+      background: $transparent-blue;
     }
    }
  }

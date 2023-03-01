@@ -62,35 +62,22 @@
       justify-content: center;
       align-items: center;
       width: 50%;
-      cursor: pointer;
-
-      &:hover {
-        filter: brightness(1.2);
-      }
-
-      &:active {
-        filter: brightness(1);
-      }
     }
     
     .share {
-      background: linear-gradient(#ffa8008a, #ffa8008a
-      );
+      background: $transparent-orange;
     }
 
     .edit {
-      background: linear-gradient(#3482c78a, #3482c78a
-      );
+      background: $transparent-blue;
     }
     
     .delete {
-      background: linear-gradient(#C757348a, #C757348a
-      );
+      background: $transparent-red;
     }
     
     .save {
-      background: linear-gradient(#34c7628a, #34c7628a
-      );
+      background: $transparent-green;
     }
   }
 }

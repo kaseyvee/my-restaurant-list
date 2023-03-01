@@ -14,7 +14,7 @@ export default function ShareProfileButton({ user }: any) {
   }
 
   return (
-    <button className='btn' onClick={handleShareProfile}>
+    <button className='btn clickable' onClick={handleShareProfile}>
       {clipboardCopy ? "Clipboarded!" : "Share Profile"}
     </button>
   )

@@ -110,17 +110,17 @@ export default function RestaurantItem({ restaurant, user, newView, recView, sav
           </div>
         </>}
         {openOptions && <>
-          <div className="share option-item" onClick={handleShareRestaurant}>
+          <div className="share option-item clickable" onClick={handleShareRestaurant}>
             {clipboardCopy ? "Clipboarded!" : "Share"}
           </div>
           {((loggedInUser && (restaurant.user_id !== loggedInUser.id)) || !loggedInUser) &&
-          <div className="save option-item" onClick={handleSaveRestaurant}>
+          <div className="save option-item clickable" onClick={handleSaveRestaurant}>
             {savedRestaurant ? "Unsave" : "Save"}
           </div>}
-          {(loggedInUser && (restaurant.user_id === loggedInUser.id)) && <div className="edit option-item" onClick={handleEditRestaurant}>
+          {(loggedInUser && (restaurant.user_id === loggedInUser.id)) && <div className="edit option-item clickable" onClick={handleEditRestaurant}>
             Edit
           </div>}
-          {(loggedInUser && (restaurant.user_id === loggedInUser.id)) && <div className="delete option-item" onClick={handleDeleteRestaurant}>
+          {(loggedInUser && (restaurant.user_id === loggedInUser.id)) && <div className="delete option-item clickable" onClick={handleDeleteRestaurant}>
             Delete
           </div>}
         </>}

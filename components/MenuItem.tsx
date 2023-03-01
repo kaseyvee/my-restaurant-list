@@ -57,19 +57,32 @@ export default function MenuItem({ menuItem, user }: any) {
   };
   
   return (
-    <div className='MenuItem'>
-      {menuItem.image && <Image src={menuItem.image} alt='menu-item' width="900" height="500" objectFit='cover'/>}
-      <div className='bottom-card'>
-        <div className='title'>
-          <h1>
-            {menuItem.name}
-          </h1>
-          <div className='rating'>
-            {getStars()}
-          </div>
+    <div className="MenuItem">
+      {menuItem.image && (
+        <Image
+          src={menuItem.image}
+          alt="menu-item"
+          width="900"
+          height="500"
+          objectFit="cover"
+        />
+      )}
+      <div className="bottom-card">
+        <div className="title">
+          <h1>{menuItem.name}</h1>
+          <div className="rating">{getStars()}</div>
         </div>
         <p>{menuItem.notes}</p>
-        {(loggedInUser && loggedInUser.id === user.id) && <div className='delete' onClick={handleDeleteItem}>Delete</div>}
+        {loggedInUser && loggedInUser.id === user.id && (
+          <div className='actions'>
+            <div className="edit clickable" onClick={handleDeleteItem}>
+              Edit
+            </div>
+            <div className="delete clickable" onClick={handleDeleteItem}>
+              Delete
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
