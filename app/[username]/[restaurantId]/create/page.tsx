@@ -103,29 +103,30 @@ export default function Create({ params }: any) {
   return (
     <div className="NewForm">
       <FormTitle text='New Item' redirect='/new'/>
-      {loading ? 
-        <ReactLoading type={"spinningBubbles"} color={"#ffffff"} width={80} />
-      :
-        <form onSubmit={e => handleCreateItem(e)}>
-          <input ref={name} type='text' id='name' placeholder='Name'/>
-          <select id="stars" defaultValue='' onChange={handleSelectRating}>
-            <option value='' disabled>Rating</option>
-            <option value={1}>1 star</option>
-            <option value={2}>2 stars</option>
-            <option value={3}>3 stars</option>
-          </select>
-          <textarea ref={notes} id='notes' placeholder='Notes'/>
-          <input ref={imageLink} type='text' id='image-url' placeholder='Image URL'/>
-          <p>or</p>
-          <label htmlFor="upload">
-            <input type='file' id='upload' onChange={e => {setImageUpload(e.target.files && e.target.files[0])}}/>
-            <Image src='/upload.png' alt="upload" width={24} height={24}/> {imageUpload ? "Oooh! Pretty!" : "Upload"}
-          </label>
-          
+      <form onSubmit={e => handleCreateItem(e)}>
+        <input ref={name} type='text' id='name' placeholder='Name'/>
+        <select id="stars" defaultValue='' onChange={handleSelectRating}>
+          <option value='' disabled>Rating</option>
+          <option value={1}>1 star</option>
+          <option value={2}>2 stars</option>
+          <option value={3}>3 stars</option>
+        </select>
+        <textarea ref={notes} id='notes' placeholder='Notes'/>
+        <input ref={imageLink} type='text' id='image-url' placeholder='Image URL'/>
+        <p>or</p>
+        <label htmlFor="upload">
+          <input type='file' id='upload' onChange={e => {setImageUpload(e.target.files && e.target.files[0])}}/>
+          <Image src='/upload.png' alt="upload" width={24} height={24}/> {imageUpload ? "Oooh! Pretty!" : "Upload"}
+        </label>
+        {loading ?
+          <div className="loading-ui">
+            <ReactLoading type={"spinningBubbles"} color={"#ffffff"} width={80} />
+          </div>
+        :
           <AddButton text="Add New Item"/>
-          {error && <h4 className="error">{error}</h4>}
-        </form>
-      }
+        }
+        {error && <h4 className="error">{error}</h4>}
+      </form>
     </div>
   )
 }
