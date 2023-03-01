@@ -30,6 +30,7 @@ export default function NewRestaurant() {
     if (!imageUpload) return;
     const imageRef = ref(storage, `restaurants/${imageUpload.name + v4()}`);
     const snapshot = await uploadBytes(imageRef, imageUpload);
+    console.log("inside handleimageupload", name.current?.value)
     const imageUrl = getDownloadURL(snapshot.ref);
     return imageUrl;
   }
@@ -53,6 +54,8 @@ export default function NewRestaurant() {
     setError('');
 
     if (name.current && !name.current.value) {
+      console.log("the fawk")
+      setLoading(false);
       return setError("Please enter the name.");
     }
 
@@ -65,7 +68,7 @@ export default function NewRestaurant() {
       }
       catch(err) {
         setLoading(false);
-        setError("Something went wrong. :( Try again.");
+        return setError("Something went wrong. :( Try again.");
       }
     }
 
@@ -83,23 +86,24 @@ export default function NewRestaurant() {
   return (
     <div className='NewForm'>
       <FormTitle text='New Restaurant' redirect='/new'/>
-      {loading ? 
-        <ReactLoading type={"spinningBubbles"} color={"#ffffff"} width={80} />
-      :
-        <form onSubmit={e => handleCreateRestaurant(e)}>
-          <input ref={name} type='text' id='name' placeholder='Name'/>
-          <input ref={address} type='text' id='address' placeholder='Address'/>
-          <input ref={imageLink} type='text' id='image-url' placeholder='Image URL'/>
-          <p>or</p>
-          <label htmlFor="upload">
-            <input type='file' id='upload' onChange={e => {setImageUpload(e.target.files && e.target.files[0])}}/>
-            <Image src='/upload.png' alt="upload" width={24} height={24}/> {imageUpload ? "Oooh! Pretty!" : "Upload"}
-          </label>
-          
+      <form onSubmit={e => handleCreateRestaurant(e)}>
+        <input ref={name} type='text' id='name' placeholder='Name'/>
+        <input ref={address} type='text' id='address' placeholder='Address'/>
+        <input ref={imageLink} type='text' id='image-url' placeholder='Image URL'/>
+        <p>or</p>
+        <label htmlFor="upload">
+          <input type='file' id='upload' onChange={e => {setImageUpload(e.target.files && e.target.files[0])}}/>
+          <Image src='/upload.png' alt="upload" width={24} height={24}/> {imageUpload ? "Oooh! Pretty!" : "Upload"}
+        </label>
+        {loading ? 
+          <div className="loading-ui">
+            <ReactLoading type={"spinningBubbles"} color={"#ffffff"} width={80} />
+          </div>
+        :
           <AddButton text="Add New Item"/>
-          {error && <h4 className="error">{error}</h4>}
-        </form>
-      }
+        }
+        {error && <h4 className="error">{error}</h4>}
+      </form>
     </div>
   );
 }

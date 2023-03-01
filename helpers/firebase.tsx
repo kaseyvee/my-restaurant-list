@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getStorage } from 'firebase/storage'
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDSuWDTVNx3KcYLrUGW_JTPJ_PdrZsRNw8",
+  apiKey: process.env.FIREBASE,
   authDomain: "my-eats-dae72.firebaseapp.com",
   projectId: "my-eats-dae72",
   storageBucket: "my-eats-dae72.appspot.com",
