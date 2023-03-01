@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from 'next/navigation';
 import { pb } from "@/helpers/dbconnect";
 import { storage } from "@/helpers/firebase";
@@ -8,16 +8,25 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { v4 } from "uuid"; 
 import ReactLoading from 'react-loading';
 
-import '../../../styles/NewForm.scss';
+import '../../../../styles/NewForm.scss';
 
 import FormTitle from "@/components/FormTitle";
 import AddButton from "@/components/AddButton";
 import Image from "next/image";
 
-export default function NewRestaurant() {
+export default function EditRestaurant({ params }: any) {
+  const [restaurant, setRestaurant] = useState<any>({});
   const [loading, setLoading] = useState(false);
   const [imageUpload, setImageUpload] = useState<any>(null);
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    pb.collection('restaurants').getOne(params.restaurantId)
+      .then(fetchedRestaurant => {
+        setRestaurant(fetchedRestaurant);
+      })
+      .catch(err => console.log(err.message))
+  }, [])
 
   const name = useRef<HTMLInputElement>(null);
   const address = useRef<HTMLInputElement>(null);
@@ -25,6 +34,10 @@ export default function NewRestaurant() {
 
   const router = useRouter();
   const loggedInUser: any = pb.authStore.model;
+
+  function redirect() {
+    router.push(`/${loggedInUser.username}/${restaurant.id}`);
+  }
 
   async function handleImageUpload() {
     if (!imageUpload) return;
@@ -35,20 +48,17 @@ export default function NewRestaurant() {
     return imageUrl;
   }
 
-  async function handleCreateRestaurantRequest(image = '') {
-    const data = {
+  async function handleEditRestaurantRequest(image = '') {
+    const data: any = {
       "name": name.current && name.current.value,
       "address": (address.current && address.current.value) || '',
-      image,
-      "user_id": loggedInUser.id,
+      image
     };
 
-    const restaurant = await pb.collection('restaurants').create(data);
-
-    return restaurant;
+    const restaurant = await pb.collection('restaurants').update(params.restaurantId, data);
   }
 
-  async function handleCreateRestaurant(e: any) {
+  async function handleEditRestaurant(e: any) {
     e.preventDefault();
     setLoading(true);
     setError('');
@@ -62,9 +72,8 @@ export default function NewRestaurant() {
     if (imageUpload) {
       try {
         const imageUrl: any = await handleImageUpload();
-        const restaurant = await handleCreateRestaurantRequest(imageUrl);
-  
-        return router.push(`/${loggedInUser.username}/${restaurant.id}/create`);
+        await handleEditRestaurantRequest(imageUrl);
+        return redirect();
       }
       catch(err) {
         setLoading(false);
@@ -74,9 +83,9 @@ export default function NewRestaurant() {
 
     if (imageLink.current && imageLink.current.value) {
       try {
-        const restaurant = await handleCreateRestaurantRequest(imageLink.current.value);
-  
-        return router.push(`/${loggedInUser.username}/${restaurant.id}/create`);
+        console.log(imageLink.current.value)
+        await handleEditRestaurantRequest(imageLink.current.value);
+        return redirect();
       }
       catch(err) {
         setLoading(false);
@@ -85,9 +94,8 @@ export default function NewRestaurant() {
     }
 
     try {
-      const restaurant = await handleCreateRestaurantRequest();
-  
-      return router.push(`/${loggedInUser.username}/${restaurant.id}/create`);
+      await handleEditRestaurantRequest();
+      return redirect();
     }
     catch(err) {
       setLoading(false);
@@ -96,24 +104,53 @@ export default function NewRestaurant() {
   }
 
   return (
-    <div className='NewForm'>
-      <FormTitle text='New Restaurant' redirect='/new'/>
-      <form onSubmit={e => handleCreateRestaurant(e)}>
-        <input ref={name} type='text' id='name' placeholder='Name'/>
-        <input ref={address} type='text' id='address' placeholder='Address'/>
-        <input ref={imageLink} type='text' id='image-url' placeholder='Image URL'/>
+    <div className="NewForm">
+      <FormTitle
+        text="Edit Restaurant"
+        redirect={`/${loggedInUser.username}/${params.restaurantId}`}
+      />
+      <form onSubmit={(e) => handleEditRestaurant(e)}>
+        <input
+          ref={name}
+          defaultValue={restaurant.name}
+          type="text"
+          placeholder="Name"
+        />
+        <input
+          ref={address}
+          defaultValue={restaurant.address}
+          type="text"
+          placeholder="Address"
+        />
+        <input
+          ref={imageLink}
+          defaultValue={restaurant.image}
+          type="text"
+          placeholder="Image URL"
+        />
         <p>or</p>
         <label htmlFor="upload">
-          <input type='file' id='upload' onChange={e => {setImageUpload(e.target.files && e.target.files[0])}}/>
-          <Image src='/upload.png' alt="upload" width={24} height={24}/> {imageUpload ? "Oooh! Pretty!" : "Upload"}
+          <input
+            type="file"
+            id="upload"
+            onChange={(e) => {
+              setImageUpload(e.target.files && e.target.files[0]);
+            }}
+          />
+          <Image src="/upload.png" alt="upload" width={24} height={24} />{" "}
+          {imageUpload ? "Oooh! Pretty!" : "Upload"}
         </label>
-        {loading ? 
+        {loading ? (
           <div className="loading-ui">
-            <ReactLoading type={"spinningBubbles"} color={"#ffffff"} width={80} />
+            <ReactLoading
+              type={"spinningBubbles"}
+              color={"#ffffff"}
+              width={80}
+            />
           </div>
-        :
-          <AddButton text="Add New Restaurant"/>
-        }
+        ) : (
+          <AddButton text="Update Restaurant" />
+        )}
         {error && <h4 className="error">{error}</h4>}
       </form>
     </div>

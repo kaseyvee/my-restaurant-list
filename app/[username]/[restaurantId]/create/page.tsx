@@ -85,19 +85,31 @@ export default function Create({ params }: any) {
       }
       catch(err) {
         setLoading(false);
-        setError("Something went wrong. :( Try again.");
+        return setError("Something went wrong. :( Try again.");
       }
     }
 
     if (imageLink.current && imageLink.current.value) {
-      await handleCreateItemRequest(imageLink.current.value);
+      try {
+        await handleCreateItemRequest(imageLink.current.value);
+  
+        return router.push(`/${loggedInUser.username}/${params.restaurantId}`);
+      }
+      catch(err) {
+        setLoading(false);
+        return setError("Something went wrong. :( Try again.");
+      }
+    }
+
+    try {
+      await handleCreateItemRequest();
 
       return router.push(`/${loggedInUser.username}/${params.restaurantId}`);
     }
-
-    await handleCreateItemRequest();
-
-    return router.push(`/${loggedInUser.username}/${params.restaurantId}`);
+    catch(err) {
+      setLoading(false);
+      return setError("Something went wrong. :( Try again.");
+    }
   }
 
   return (

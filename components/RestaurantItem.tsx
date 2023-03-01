@@ -20,6 +20,10 @@ export default function RestaurantItem({ restaurant, user, newView, recView, sav
     openOptions ? setOpenOptions(false) : setOpenOptions(true); 
   }
 
+  function handleEditRestaurant() {
+    window.location.href=`/${loggedInUser?.username}/${restaurant.id}/edit`;
+  }
+
   async function handleDeleteRestaurant() {
     await pb.collection('restaurants').delete(restaurant.id);
     if (recView) return router.push(`/${user.username}`);
@@ -112,6 +116,9 @@ export default function RestaurantItem({ restaurant, user, newView, recView, sav
           {((loggedInUser && (restaurant.user_id !== loggedInUser.id)) || !loggedInUser) &&
           <div className="save option-item" onClick={handleSaveRestaurant}>
             {savedRestaurant ? "Unsave" : "Save"}
+          </div>}
+          {(loggedInUser && (restaurant.user_id === loggedInUser.id)) && <div className="edit option-item" onClick={handleEditRestaurant}>
+            Edit
           </div>}
           {(loggedInUser && (restaurant.user_id === loggedInUser.id)) && <div className="delete option-item" onClick={handleDeleteRestaurant}>
             Delete
